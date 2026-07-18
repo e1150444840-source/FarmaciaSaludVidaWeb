@@ -17,10 +17,17 @@ public class TipoClienteController {
 	@Autowired
 	private ITipoClienteService servicioTipoCliente;
 	
+	// CONSTRUCTOR
+	public TipoClienteController(ITipoClienteService servicioTipoCliente) {
+
+		this.servicioTipoCliente = servicioTipoCliente;
+	}
+
 	@GetMapping
 	public String leerPagina() {
 		List<TipoClienteResponseDto> resultadoDB = servicioTipoCliente.listarTipoCliente();
 		System.out.println(resultadoDB);
 		return "/cliente/listartipocliente"; // ruta fisica de la pagina
 	}
+
 }

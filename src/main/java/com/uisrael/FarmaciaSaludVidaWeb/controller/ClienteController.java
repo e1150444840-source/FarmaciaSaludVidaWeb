@@ -17,6 +17,12 @@ public class ClienteController {
 	@Autowired
 	private IClienteService servicioCliente;
 	
+	// CONSTRUCTOR
+	public ClienteController(IClienteService servicioCliente) {
+
+		this.servicioCliente = servicioCliente;
+	}
+
 	@GetMapping
 	public String leerPagina() {
 		List<ClienteResponseDto> resultadoDB = servicioCliente.listarCliente();

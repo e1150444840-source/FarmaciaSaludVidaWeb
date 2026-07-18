@@ -12,8 +12,8 @@
 <meta name="author" content="">
 
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="../assets/images/favicon.png">
+<link rel="icon" type="image/png" sizes="50x50"
+	href="../assets/images/favicon.ico">
 <title>Inicio</title>
 <!-- This page plugin CSS -->
 <!-- <link href="../assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet"> -->
@@ -62,8 +62,8 @@
 					<!-- ============================================================== -->
 					<div class="navbar-brand">
 						<!-- Logo icon -->
-						<a href="index.html"> <img
-							src="../assets/images/freedashDark.svg" alt="" class="img-fluid">
+						<a href="../index.html"> <img
+							src="../assets/images/logoHorizontal1.png" alt="" class="img-fluid">
 						</a>
 					</div>
 					<!-- ============================================================== -->
@@ -140,13 +140,13 @@
 				<nav class="sidebar-nav">
 					<ul id="sidebarnav">
 						<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-							href="index.html" aria-expanded="false"><i
+							href="../index.html" aria-expanded="false"><i
 								data-feather="home" class="feather-icon"></i><span
 								class="hide-menu">Inicio</span></a></li>
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Applications</span></li>
 						<li class="list-divider"></li>
-						<li class="nav-small-cap"><span class="hide-menu">Components</span></li>
+						<li class="nav-small-cap"><span class="hide-menu">Menú</span></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
 							href="javascript:void(0)" aria-expanded="false"><i
 								data-feather="file-text" class="feather-icon"></i><span
@@ -185,19 +185,19 @@
 								class="hide-menu">Inventario</span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
-								<li class="sidebar-item"><a href="form-inputs.html"
+								<li class="sidebar-item"><a th:href="@{/inventario}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Inventario </span></a></li>
 								<li class="sidebar-item"><a href="form-input-grid.html"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Inventario</span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/laboratorio}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Laboratorio</span></a></li>
 								<li class="sidebar-item"><a href="form-input-grid.html"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Laboratorio</span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/lote}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Lote</span></a></li>
 								<li class="sidebar-item"><a href="form-input-grid.html"
@@ -210,7 +210,7 @@
 								class="hide-menu">Pedido</span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
-								<li class="sidebar-item"><a href="table-basic.html"
+								<li class="sidebar-item"><a th:href="@{/pedido}"
 									class="sidebar-link"><span class="hide-menu">Lista
 											Pedido</span></a></li>
 								<li class="sidebar-item"><a href="table-dark-basic.html"
@@ -223,13 +223,13 @@
 								class="hide-menu">Producto </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
-								<li class="sidebar-item"><a href="chart-morris.html"
+								<li class="sidebar-item"><a th:href="@{/producto}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Producto </span></a></li>
 								<li class="sidebar-item"><a href="chart-knob.html"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Producto </span></a></li>
-								<li class="sidebar-item"><a href="form-inputs.html"
+								<li class="sidebar-item"><a th:href="@{/categoria}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Categoría </span></a></li>
 								<li class="sidebar-item"><a href="form-input-grid.html"
@@ -242,7 +242,7 @@
 								class="hide-menu">Usuario </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
-								<li class="sidebar-item"><a href="chart-morris.html"
+								<li class="sidebar-item"><a th:href="@{/usuario}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Usuario </span></a></li>
 								<li class="sidebar-item"><a href="chart-chart-js.html"
@@ -255,7 +255,7 @@
 								class="hide-menu">Vehículo </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
-								<li class="sidebar-item"><a href="chart-morris.html"
+								<li class="sidebar-item"><a th:href="@{/vehiculo}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Vehículo </span></a></li>
 								<li class="sidebar-item"><a href="chart-chart-js.html"
@@ -268,13 +268,13 @@
 								class="hide-menu">Ventas </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
-								<li class="sidebar-item"><a href="ui-buttons.html"
+								<li class="sidebar-item"><a th:href="@{/venta}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Ventas </span></a></li>
 								<li class="sidebar-item"><a href="ui-modals.html"
 									class="sidebar-link"><span class="hide-menu"> Nueva
 											Ventas </span></a></li>
-								<li class="sidebar-item"><a href="ui-buttons.html"
+								<li class="sidebar-item"><a th:href="@{/detalleVenta}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Detalle Ventas </span></a></li>
 								<li class="sidebar-item"><a href="ui-modals.html"
