@@ -12,7 +12,7 @@
 
 	<!-- multi-column ordering -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">LISTA DE LABORATORIO</h4>
+		<h4 class="card-title">LISTA LABORATORIO</h4>
 		<div class="table-responsive">
 			<table id="multi_col_order"
 				class="table border table-striped table-bordered text-nowrap"
@@ -22,34 +22,22 @@
 						<th>ID</th>
 						<th>NOMBRE LABORATORIO</th>
 						<th>TELÉFONO</th>
+						<th>ACCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Tiger</td>
-						<td>Nixon</td>
-						<td>Nixon</td>
+					<tr th:each="indice : ${listaLaboratorio}">
+						<td th:text="${indice.idLaboratorio}"></td>
+						<td th:text="${indice.nombreLaboratorio}"></td>
+						<td th:text="${indice.telefonoLaboratorio}"></td>
+						<td>
+							<a href="" class="btn btn-primary" title="Editar">
+							<i class="far fa-edit"></i></a> 
+							<a href="" class="btn btn-danger" title="Eliminar">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
-					<tr>
-						<td>Garrett</td>
-						<td>Winters</td>
-						<td>Nixon</td>
-					</tr>
-					<tr>
-						<td>Ashton</td>
-						<td>Cox</td>
-						<td>Nixon</td>
-					</tr>
-					<tr>
-						<td>Cedric</td>
-						<td>Kelly</td>
-						<td>Nixon</td>
-					</tr>
-					<tr>
-						<td>Airi</td>
-						<td>Satou</td>
-						<td>Nixon</td>
-					</tr>
+				
 				</tbody>
 			</table>
 		</div>

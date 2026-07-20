@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VehiculoRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.VehiculoResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IVehiculoService;
 
@@ -21,6 +23,12 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	public List<VehiculoResponseDto> listarVehiculo() {
 		return webClient.get().uri("/vehiculo").retrieve()
 				.bodyToFlux(VehiculoResponseDto.class).collectList().block();
+	}
+
+	@Override
+	public void guardarVehiculo(VehiculoRequestDto nuevo) {
+		webClient.post().uri("/vehiculo")
+		.bodyValue(nuevo).retrieve().toBodilessEntity().block();		
 	}
 
 }

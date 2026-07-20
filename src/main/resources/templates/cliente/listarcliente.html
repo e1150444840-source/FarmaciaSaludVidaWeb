@@ -25,56 +25,29 @@
 						<th>CÉDULA</th>
 						<th>TELÉFONO</th>
 						<th>DIRECCIÓN</th>
-						<th>CORREO</th>
+						<th>CORREO ELECTRÓNICO</th>
+						<th>ACCIONES</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr>
-						<td>Tiger</td>
-						<td>Nixon</td>
-						<td>System Architect</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
+					<tr th:each="indice : ${listaClientes}">
+						<td th:text="${indice.idCliente}"></td>
+						<td th:text="${indice.nombreCliente}"></td>
+						<td th:text="${indice.apellidoCliente}"></td>
+						<td th:text="${indice.ciCliente}"></td>
+						<td th:text="${indice.telefonoCliente}"></td>
+						<td th:text="${indice.direccionCliente}"></td>
+						<td th:text="${indice.correoCliente}"></td>
+						<td>
+							<a href="" class="btn btn-primary" title="Editar">
+							<i class="far fa-edit"></i></a> 
+							<a href="" class="btn btn-danger" title="Eliminar">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
-					<tr>
-						<td>Garrett</td>
-						<td>Winters</td>
-						<td>Accountant</td>
-						<td>Tokyo</td>
-						<td>$170,750</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
-					<tr>
-						<td>Ashton</td>
-						<td>Cox</td>
-						<td>Junior Technical Author</td>
-						<td>San Francisco</td>
-						<td>$86,000</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
-					<tr>
-						<td>Cedric</td>
-						<td>Kelly</td>
-						<td>Senior Javascript Developer</td>
-						<td>Edinburgh</td>
-						<td>$433,060</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
-					<tr>
-						<td>Airi</td>
-						<td>Satou</td>
-						<td>Accountant</td>
-						<td>Tokyo</td>
-						<td>$162,700</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
+
+
 				</tbody>
 			</table>
 		</div>

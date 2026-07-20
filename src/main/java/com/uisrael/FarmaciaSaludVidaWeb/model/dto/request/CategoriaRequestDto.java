@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class CategoriaRequestDto {
 
-	private final int idCategoria;
-	private final String nombreCategoria;
+	private int idCategoria;
+	private String nombreCategoria;
 }

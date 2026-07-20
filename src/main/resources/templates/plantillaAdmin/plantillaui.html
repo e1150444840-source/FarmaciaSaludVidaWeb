@@ -62,7 +62,7 @@
 					<!-- ============================================================== -->
 					<div class="navbar-brand">
 						<!-- Logo icon -->
-						<a href="../index.html"> <img
+						<a href="index.html"> <img
 							src="../assets/images/logoHorizontal1.png" alt="" class="img-fluid">
 						</a>
 					</div>
@@ -140,7 +140,7 @@
 				<nav class="sidebar-nav">
 					<ul id="sidebarnav">
 						<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-							href="../index.html" aria-expanded="false"><i
+							href="index.html" aria-expanded="false"><i
 								data-feather="home" class="feather-icon"></i><span
 								class="hide-menu">Inicio</span></a></li>
 						<li class="list-divider"></li>
@@ -156,13 +156,13 @@
 								<li class="sidebar-item"><a th:href="@{/cliente}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Clientes </span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/cliente/nuevoCliente}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Clientes</span></a></li>
 								<li class="sidebar-item"><a th:href="@{/tipoCliente}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Tipo Clientes </span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/tipoCliente/nuevoTipoCliente}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Tipo Clientes</span></a></li>
 							</ul></li>
@@ -175,9 +175,15 @@
 								<li class="sidebar-item"><a th:href="@{/farmacia}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Farmacia </span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/farmacia/nuevoFarmacia}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Farmacia</span></a></li>
+								<li class="sidebar-item"><a th:href="@{/laboratorio}"
+									class="sidebar-link"><span class="hide-menu"> Lista
+											Laboratorio</span></a></li>
+								<li class="sidebar-item"><a th:href="@{/laboratorio/nuevoLaboratorio}"
+									class="sidebar-link"><span class="hide-menu"> Nuevo
+											Laboratorio</span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
 							href="javascript:void(0)" aria-expanded="false"><i
@@ -188,19 +194,13 @@
 								<li class="sidebar-item"><a th:href="@{/inventario}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Inventario </span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/inventario/nuevoInventario}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Inventario</span></a></li>
-								<li class="sidebar-item"><a th:href="@{/laboratorio}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Laboratorio</span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Laboratorio</span></a></li>
 								<li class="sidebar-item"><a th:href="@{/lote}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Lote</span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/lote/nuevoLote}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Lote</span></a></li>
 							</ul></li>
@@ -213,7 +213,7 @@
 								<li class="sidebar-item"><a th:href="@{/pedido}"
 									class="sidebar-link"><span class="hide-menu">Lista
 											Pedido</span></a></li>
-								<li class="sidebar-item"><a href="table-dark-basic.html"
+								<li class="sidebar-item"><a th:href="@{/pedido/nuevoPedido}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Pedido </span></a></li>
 							</ul></li>
@@ -226,13 +226,13 @@
 								<li class="sidebar-item"><a th:href="@{/producto}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Producto </span></a></li>
-								<li class="sidebar-item"><a href="chart-knob.html"
+								<li class="sidebar-item"><a th:href="@{/producto/nuevoProducto}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Producto </span></a></li>
 								<li class="sidebar-item"><a th:href="@{/categoria}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Categoría </span></a></li>
-								<li class="sidebar-item"><a href="form-input-grid.html"
+								<li class="sidebar-item"><a th:href="@{/categoria/nuevoCategoria}"
 									class="sidebar-link"><span class="hide-menu"> Nueva
 											Categoría </span></a></li>
 							</ul></li>
@@ -245,7 +245,7 @@
 								<li class="sidebar-item"><a th:href="@{/usuario}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Usuario </span></a></li>
-								<li class="sidebar-item"><a href="chart-chart-js.html"
+								<li class="sidebar-item"><a th:href="@{/usuario/nuevoUsuario}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Usuario </span></a></li>
 							</ul></li>
@@ -258,7 +258,7 @@
 								<li class="sidebar-item"><a th:href="@{/vehiculo}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Vehículo </span></a></li>
-								<li class="sidebar-item"><a href="chart-chart-js.html"
+								<li class="sidebar-item"><a th:href="@{/vehiculo/nuevoVehiculo}"
 									class="sidebar-link"><span class="hide-menu"> Nuevo
 											Vehículo </span></a></li>
 							</ul></li>
@@ -271,13 +271,13 @@
 								<li class="sidebar-item"><a th:href="@{/venta}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Ventas </span></a></li>
-								<li class="sidebar-item"><a href="ui-modals.html"
+								<li class="sidebar-item"><a  th:href="@{/venta/nuevoVenta}"
 									class="sidebar-link"><span class="hide-menu"> Nueva
 											Ventas </span></a></li>
 								<li class="sidebar-item"><a th:href="@{/detalleVenta}"
 									class="sidebar-link"><span class="hide-menu"> Lista
 											Detalle Ventas </span></a></li>
-								<li class="sidebar-item"><a href="ui-modals.html"
+								<li class="sidebar-item"><a  th:href="@{/detalleVenta/nuevoDetalleVenta}"
 									class="sidebar-link"><span class="hide-menu"> Nueva
 											Detalle Ventas </span></a></li>
 							</ul></li>

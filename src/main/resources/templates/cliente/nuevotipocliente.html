@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Tipo Cliente</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVO TIPO CLIENTES</h4>
+		<form th:action="@{/tipoCliente/guardar}" th:object="${tipoCliente}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idTipoCliente}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">NOMBRE</label> 
+				<input type="text" class="form-control" id="nombre" th:field="*{nombreTipoCliente}">
+			</div>
+			<div class="mb-3">
+				<label for="descripcion" class="form-label">DESCRIPCIÓN</label> 
+				<input	type="text" class="form-control" id="descripcion" th:field="*{descripcion}">
+			</div>
+			<div class="mb-3 form-check">
+   				<input type="checkbox" class="form-check-input" id="estado" th:field="*{estado}">
+    			<label class="form-check-label" for="estado">Activo</label>
+  			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

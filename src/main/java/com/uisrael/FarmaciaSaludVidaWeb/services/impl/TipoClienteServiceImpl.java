@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.TipoClienteRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.TipoClienteResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ITipoClienteService;
 
@@ -22,6 +23,13 @@ public class TipoClienteServiceImpl implements ITipoClienteService {
 	public List<TipoClienteResponseDto> listarTipoCliente() {
 		return webClient.get().uri("/tipoCliente").retrieve()
 				.bodyToFlux(TipoClienteResponseDto.class).collectList().block();
+	}
+
+	@Override
+	public void guardarTipoCliente(TipoClienteRequestDto nuevo) {
+		webClient.post().uri("/tipoCliente")
+		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
+		
 	}
 
 }

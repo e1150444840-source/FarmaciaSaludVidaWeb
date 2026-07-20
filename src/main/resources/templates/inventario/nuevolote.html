@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Lote</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVO LOTE</h4>
+		<form th:action="@{/lote/guardar}" th:object="${lote}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idLote}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="numero" class="form-label">NÚMERO DE LOTE</label> 
+				<input type="text" class="form-control" id="numero" th:field="*{numeroLote}">
+			</div>
+			<div class="mb-3">
+				<label for="fingreso" class="form-label">FECHA DE INGRESO</label> 
+				<input	type="text" class="form-control" id="fingreso" th:field="*{fechaIngreso}">
+			</div>
+			<div class="mb-3">
+				<label for="fcaducidad" class="form-label">FECHA DE CADUCIDAD</label> 
+				<input type="text" class="form-control" id="fcaducidad" th:field="*{fechaCaducidad}">
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

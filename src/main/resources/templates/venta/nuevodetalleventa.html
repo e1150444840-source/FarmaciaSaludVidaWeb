@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Detalle Venta </title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVO DETALLE VENTA </h4>
+		<form th:action="@{/detalleVenta/guardar}" th:object="${detalleVenta}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idDetalleVenta}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="cantidad" class="form-label">CANTIDAD</label> 
+				<input type="text" class="form-control" id="cantidad" th:field="*{cantidad}">
+			</div>
+			<div class="mb-3">
+				<label for="punitario" class="form-label">PRECIO UNITARIO</label> 
+				<input	type="text" class="form-control" id="punitario" th:field="*{precioUnitario}">
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

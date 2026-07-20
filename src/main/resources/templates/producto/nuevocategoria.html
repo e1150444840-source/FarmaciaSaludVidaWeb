@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nueva Categoria</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVA CATEGORÍA</h4>
+		<form th:action="@{/categoria/guardar}" th:object="${categoria}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idCategoria}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">NOMBRE CATEGORÍA</label> 
+				<input type="text" class="form-control" id="nombre" th:field="*{nombreCategoria}">
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

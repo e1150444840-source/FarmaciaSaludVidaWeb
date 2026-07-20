@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Vehículo</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVO VEHÍCULO</h4>
+		<form th:action="@{/vehiculo/guardar}" th:object="${vehiculo}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idVehiculo}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="placa" class="form-label">PLACA</label> 
+				<input type="text" class="form-control" id="placa" th:field="*{placa}">
+			</div>
+			<div class="mb-3">
+				<label for="capacidad" class="form-label">CAPACIDAD</label> 
+				<input	type="text" class="form-control" id="capacidad" th:field="*{capacidad}">
+			</div>
+			<div class="mb-3">
+				<label for="disponibilidad" class="form-label">DISPONIBILIDAD</label> 
+				<select id="disponibilidad" th:field="*{estadoDisponibilidad}" class="form-select">
+					<option value="" disabled selected>-- Seleccione un estado --</option>
+					<option value="DISPONIBLE">DISPONIBLE</option>
+					<option value="EN_RUTA">EN_RUTA</option>
+					<option value="EN_TALLER">EN_TALLER</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

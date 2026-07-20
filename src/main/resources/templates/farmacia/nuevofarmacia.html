@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nueva Farmacia</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVA FARMACIA</h4>
+		<form th:action="@{/farmacia/guardar}" th:object="${farmacia}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idFarmacia}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">NOMBRE</label> 
+				<input type="text" class="form-control" id="nombre" th:field="*{nombreFarmacia}">
+			</div>
+			<div class="mb-3">
+				<label for="direccion" class="form-label">DIRECCIÓN</label> 
+				<input	type="text" class="form-control" id="direccion" th:field="*{direccion}">
+			</div>
+			<div class="mb-3">
+				<label for="ciudad" class="form-label">CIUDAD</label> 
+				<input type="text" class="form-control" id="ciudad" th:field="*{ciudad}">
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

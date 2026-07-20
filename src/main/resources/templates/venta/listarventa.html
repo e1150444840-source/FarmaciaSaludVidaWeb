@@ -5,7 +5,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Lista Venta</title>
+<title>Lista Ventas</title>
 </head>
 
 <body>
@@ -20,54 +20,32 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>CANAL</th>
-						<th>FECHA</th>
+						<th>CANAL DE VENTA</th>
+						<th>FECHA DE VENTA</th>
 						<th>SUBTOTAL</th>
 						<th>IVA</th>
 						<th>TOTAL</th>
+						<th>ACCIONES</th>
 					</tr>
 				</thead>
+
 				<tbody>
-					<tr>
-						<td>Tiger</td>
-						<td>Nixon</td>
-						<td>System Architect</td>
-						<td>Edinburgh</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
+					<tr th:each="indice : ${listaVenta}">
+						<td th:text="${indice.idVenta}"></td>
+						<td th:text="${indice.canalVenta}"></td>
+						<td th:text="${indice.fechaEmison}"></td>
+						<td th:text="${indice.subtotal}"></td>
+						<td th:text="${indice.iva}"></td>
+						<td th:text="${indice.total}"></td>
+						<td>
+							<a href="" class="btn btn-primary" title="Editar">
+							<i class="far fa-edit"></i></a> 
+							<a href="" class="btn btn-danger" title="Eliminar">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
-					<tr>
-						<td>Garrett</td>
-						<td>Winters</td>
-						<td>Accountant</td>
-						<td>Tokyo</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
-					<tr>
-						<td>Ashton</td>
-						<td>Cox</td>
-						<td>Junior Technical Author</td>
-						<td>San Francisco</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
-					<tr>
-						<td>Cedric</td>
-						<td>Kelly</td>
-						<td>Senior Javascript Developer</td>
-						<td>Edinburgh</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
-					<tr>
-						<td>Airi</td>
-						<td>Satou</td>
-						<td>Accountant</td>
-						<td>Tokyo</td>
-						<td>Edinburgh</td>
-						<td>$320,800</td>
-					</tr>
+
+
 				</tbody>
 			</table>
 		</div>

@@ -5,19 +5,19 @@ import lombok.Data;
 @Data
 public class ClienteRequestDto {
 
-	private final int idCliente;// porque trabaja el FJPA
+	private int idCliente;// porque trabaja el FJPA
 	
-	private final String ciCliente;
+	private String ciCliente;
 
-	private final String nombreCliente;
+	private String nombreCliente;
 
-	private final String apellidoCliente;
+	private String apellidoCliente;
 
-	private final String telefonoCliente;
+	private String telefonoCliente;
 
-	private final String direccionCliente;
+	private String direccionCliente;
 
-	private final String correoCliente;
+	private String correoCliente;
 
 	//private TipoClienteEntity fkTipoCliente;
 }

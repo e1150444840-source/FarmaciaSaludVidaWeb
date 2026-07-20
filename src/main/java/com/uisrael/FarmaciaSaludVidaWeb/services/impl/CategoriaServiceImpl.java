@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.CategoriaRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.CategoriaResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ICategoriaService;
 
@@ -22,6 +23,13 @@ public class CategoriaServiceImpl implements ICategoriaService {
 	public List<CategoriaResponseDto> listarCategoria() {
 		return webClient.get().uri("/categoria").retrieve()
 				.bodyToFlux(CategoriaResponseDto.class).collectList().block();
+	}
+
+	@Override
+	public void guardarCategoria(CategoriaRequestDto nuevo) {
+		webClient.post().uri("/categoria")
+		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
+				
 	}
 
 }

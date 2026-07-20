@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nueva Laboratorio</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVA LABORATORIO</h4>
+		<form th:action="@{/laboratorio/guardar}" th:object="${laboratorio}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idLaboratorio}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">NOMBRE</label> 
+				<input type="text" class="form-control" id="nombre" th:field="*{nombreLaboratorio}">
+			</div>
+			<div class="mb-3">
+				<label for="telefono" class="form-label">TELÉFONO</label> 
+				<input	type="text" class="form-control" id="telefono" th:field="*{telefonoLaboratorio}">
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

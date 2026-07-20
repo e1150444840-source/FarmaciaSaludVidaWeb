@@ -21,28 +21,19 @@
 					<tr>
 						<th>ID</th>
 						<th>STOCK ACTUAL</th>
+						<th>ACCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Tiger</td>
-						<td>Nixon</td>
-					</tr>
-					<tr>
-						<td>Garrett</td>
-						<td>Winters</td>
-					</tr>
-					<tr>
-						<td>Ashton</td>
-						<td>Cox</td>
-					</tr>
-					<tr>
-						<td>Cedric</td>
-						<td>Kelly</td>
-					</tr>
-					<tr>
-						<td>Airi</td>
-						<td>Satou</td>
+					<tr th:each="indice : ${listaInventario}">
+						<td th:text="${indice.idInventario}"></td>
+						<td th:text="${indice.stockActual}"></td>
+						<td>
+							<a href="" class="btn btn-primary" title="Editar">
+							<i class="far fa-edit"></i></a> 
+							<a href="" class="btn btn-danger" title="Eliminar">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

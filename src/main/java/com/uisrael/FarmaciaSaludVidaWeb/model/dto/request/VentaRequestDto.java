@@ -7,12 +7,12 @@ import lombok.Data;
 @Data
 public class VentaRequestDto {
 
-	private final int idVenta;
-	private final LocalDate fechaEmison;
-	private final String canalVenta; // Física', 'En Línea
-	private final double subtotal;
-	private final double iva;
-	private final double total;
+	private int idVenta;
+	private LocalDate fechaEmison;
+	private String canalVenta; // Física', 'En Línea
+	private double subtotal;
+	private double iva;
+	private double total;
 	// private ClienteEntity fkCliente;
 	// private UsuarioEntity fkUsuario;
 }

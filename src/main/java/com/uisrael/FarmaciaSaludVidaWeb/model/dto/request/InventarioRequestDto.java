@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class InventarioRequestDto {
 
-	private final int idInventario;
-	private final int stockActual;
+	private int idInventario;
+	private int stockActual;
 	//private LoteEntity fkLote;
 	//private FarmaciaEntity fkFarmacia;
 }

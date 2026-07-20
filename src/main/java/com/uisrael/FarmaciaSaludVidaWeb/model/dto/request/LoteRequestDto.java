@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class LoteRequestDto {
 
-	private final int idLote;
-	private final String numeroLote;
-	private final LocalDate fechaCaducidad;
-	private final LocalDate fechaIngreso;
+	private int idLote;
+	private String numeroLote;
+	private LocalDate fechaCaducidad;
+	private LocalDate fechaIngreso;
 	// private ProductoEntity fkProducto;
 }

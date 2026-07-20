@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Pedido</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVO PEDIDO</h4>
+		<form th:action="@{/pedido/guardar}" th:object="${pedido}"
+			method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idPedido}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="dpedido" class="form-label">DIRECCIÓN DE PEDIDO</label>
+				<input type="text" class="form-control" id="dpedido" th:field="*{direccionPedido}">
+			</div>
+			<div class="mb-3">
+				<label for="fpedido" class="form-label">FECHA PEDIDO</label> 
+				<input type="text" class="form-control" id="fpedido" th:field="*{fechaPedido}">
+			</div>
+			<div class="mb-3">
+				<label for="estadoPedido" class="form-label">ESTADO DEL	PEDIDO:</label> 
+				<select id="estadoPedido" th:field="*{estadoPedido}" class="form-select">
+					<option value="" disabled selected>-- Seleccione un estado --</option>
+					<option value="PENDIENTE">PENDIENTE</option>
+					<option value="EN_PREPARACION">EN_PREPARACION</option>
+					<option value="EN_RUTA">EN_RUTA</option>
+					<option value="ENTREGADO">ENTREGADO</option>
+					<option value="CANCELADO">CANCELADO</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

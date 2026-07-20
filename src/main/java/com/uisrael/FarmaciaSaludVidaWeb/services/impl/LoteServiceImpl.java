@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.LoteRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.LoteResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ILoteService;
 
@@ -21,6 +23,13 @@ public class LoteServiceImpl implements ILoteService {
 	public List<LoteResponseDto> listarLote() {
 		return webClient.get().uri("/lote").retrieve()
 				.bodyToFlux(LoteResponseDto.class).collectList().block();
+	}
+
+	@Override
+	public void guardarLote(LoteRequestDto nuevo) {
+		webClient.post().uri("/lote")
+		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
+		
 	}
 
 }

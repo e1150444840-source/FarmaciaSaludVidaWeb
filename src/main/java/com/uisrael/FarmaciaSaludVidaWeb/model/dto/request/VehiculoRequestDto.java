@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class VehiculoRequestDto {
 
-	private final int idVehiculo;
-	private final String placa;
-	private final String capacidad;
-	private final String estadoDisponibilidad;
+	private int idVehiculo;
+	private String placa;
+	private String capacidad;
+	private  String estadoDisponibilidad;
 
 }

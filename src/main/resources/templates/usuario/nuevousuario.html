@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Usuario</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVO USUARIO</h4>
+		<form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idUsuario}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">NOMBRE</label> 
+				<input type="text" class="form-control" id="nombre" th:field="*{nombreUsuario}">
+			</div>
+			<div class="mb-3">
+				<label for="apellido" class="form-label">APELLIDO</label> 
+				<input	type="text" class="form-control" id="apellido" th:field="*{apellidoUsuario}">
+			</div>
+			<div class="mb-3">
+				<label for="usuario" class="form-label">USUARIO</label> 
+				<input type="text" class="form-control" id="usuario" th:field="*{username}">
+			</div>
+			<div class="mb-3">
+				<label for="contraseña" class="form-label">CONTRASEÑA</label> 
+				<input type="text" class="form-control" id="contraseña" th:field="*{password}">
+			</div>
+			<div class="mb-3">
+				<label for="rol" class="form-label">ROL</label> 
+				<input type="text" class="form-control" id="rol" th:field="*{rol}">
+			</div>
+			<div class="mb-3 form-check">
+   				<input type="checkbox" class="form-check-input" id="estado" th:field="*{estado}">
+    			<label class="form-check-label" for="estado">Activo</label>
+  			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class DetalleVentaRequestDto {
 
-	private final int idDetalleVenta;
-	private final int cantidad;
-	private final double precioUnitario;
+	private int idDetalleVenta;
+	private int cantidad;
+	private double precioUnitario;
 	// private VentaEntity fkVenta;
 	// private InventarioEntity fkInventario;
 }

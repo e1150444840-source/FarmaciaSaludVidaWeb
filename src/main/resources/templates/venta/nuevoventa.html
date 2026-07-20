@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="/plantillaAdmin/plantillaui">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo Venta</title>
+</head>
+
+<body>
+
+	<!-- multi-column ordering -->
+	<div layout:fragment="contenidopaguinas">
+		<h4 class="card-title">NUEVA VENTA</h4>
+		<form th:action="@{/venta/guardar}" th:object="${venta}" method="post">
+			<div class="mb-3">
+				<input type="hidden" th:field="*{idVenta}" value="0" />
+			</div>
+			<div class="mb-3">
+				<label for="cventa" class="form-label">CANAL DE VENTA</label> 
+				<select id="cventa" th:field="*{canalVenta}" class="form-select">
+					<option value="" disabled selected>-- Seleccione una Opción --</option>
+					<option value="FISICA">FÍSICA</option>
+					<option value="EN_LINEA">EN_LINEA</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label for="fventa" class="form-label">FECHA DE VENTA</label> 
+				<input	type="text" class="form-control" id="fventa" th:field="*{fechaEmison}">
+			</div>
+			<div class="mb-3">
+				<label for="subtotal" class="form-label">SUBTOTAL</label> 
+				<input type="text" class="form-control" id="subtotal" th:field="*{subtotal}">
+			</div>
+			<div class="mb-3">
+				<label for="iva" class="form-label">IVA</label> 
+				<input type="text" class="form-control" id="iva" th:field="*{iva}">
+			</div>
+			<div class="mb-3">
+				<label for="total" class="form-label">TOTAL</label> 
+				<input type="text" class="form-control" id="total" th:field="*{total}">
+			</div>
+			<button type="submit" class="btn btn-primary">GUARDAR</button>
+		</form>
+
+	</div>
+</body>
+
+</html>

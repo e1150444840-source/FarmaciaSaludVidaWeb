@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class ProductoRequestDto {
 
-	private final int idProducto;
-	private final String nombreProducto;
-	private final String descripcion;
+	private int idProducto;
+	private String nombreProducto;
+	private String descripcion;
 	//private CategoriaEntity fkCategoria;
 	//private LaboratorioEntity fkLaboratorio;
 }

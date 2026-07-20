@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VentaRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.VentaResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IVentaService;
 
@@ -21,6 +23,12 @@ public class VentaServiceImpl implements IVentaService {
 	public List<VentaResponseDto> listarVenta() {
 		return webClient.get().uri("/venta").retrieve()
 				.bodyToFlux(VentaResponseDto.class).collectList().block();
+	}
+
+	@Override
+	public void guardarVenta(VentaRequestDto nuevo) {
+		webClient.post().uri("/venta")
+		.bodyValue(nuevo).retrieve().toBodilessEntity().block();	
 	}
 
 }

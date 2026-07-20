@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.CategoriaRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.CategoriaResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ICategoriaService;
 
@@ -24,10 +28,22 @@ public class CategoriaController {
 	}
 
 	@GetMapping
-	public String leerPagina() {
+	public String leerPagina(Model model) {
 		List<CategoriaResponseDto> resultadoDB = servicioCategoria.listarCategoria();
-		System.out.println(resultadoDB);
+		model.addAttribute("listaCategoria", resultadoDB);
 		return "/producto/listarcategoria"; // ruta fisica de la pagina
 	}
 
+	@GetMapping("/nuevoCategoria")
+	public String crearCategoria(Model model) {
+		model.addAttribute("categoria", new CategoriaRequestDto());
+		return "/producto/nuevocategoria";
+	}
+
+	@PostMapping("/guardar")
+	public String guardarCategoria(@ModelAttribute CategoriaRequestDto categoria) {
+
+		servicioCategoria.guardarCategoria(categoria);
+		return "redirect:/categoria";
+	}
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LaboratorioRequestDto {
 
-	private final int idLaboratorio;
-	private final String nombreLaboratorio;
-	private final String telefonoLaboratorio;
+	private int idLaboratorio;
+	private String nombreLaboratorio;
+	private String telefonoLaboratorio;
 }
