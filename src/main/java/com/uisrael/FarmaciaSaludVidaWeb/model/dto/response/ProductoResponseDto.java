@@ -1,12 +1,15 @@
 package com.uisrael.FarmaciaSaludVidaWeb.model.dto.response;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.CategoriaRequestDto;
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.LaboratorioRequestDto;
+
 public class ProductoResponseDto {
 
 	private int idProducto;
 	private String nombreProducto;
 	private String descripcion;
-	//private CategoriaEntity fkCategoria;
-	//private LaboratorioEntity fkLaboratorio;
+	private CategoriaRequestDto fkCategoria;
+	private LaboratorioRequestDto fkLaboratorio;
 
 	public int getIdProducto() {
 		return idProducto;
@@ -32,20 +35,20 @@ public class ProductoResponseDto {
 		this.descripcion = descripcion;
 	}
 
-	/*public CategoriaEntity getFkCategoria() {
+	public CategoriaRequestDto getFkCategoria() {
 		return fkCategoria;
 	}
 
-	public void setFkCategoria(CategoriaEntity fkCategoria) {
+	public void setFkCategoria(CategoriaRequestDto fkCategoria) {
 		this.fkCategoria = fkCategoria;
 	}
 
-	public LaboratorioEntity getFkLaboratorio() {
+	public LaboratorioRequestDto getFkLaboratorio() {
 		return fkLaboratorio;
 	}
 
-	public void setFkLaboratorio(LaboratorioEntity fkLaboratorio) {
+	public void setFkLaboratorio(LaboratorioRequestDto fkLaboratorio) {
 		this.fkLaboratorio = fkLaboratorio;
-	}*/
+	}
 
 }

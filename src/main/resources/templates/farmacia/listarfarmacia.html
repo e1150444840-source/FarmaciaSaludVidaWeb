@@ -30,10 +30,11 @@
 					<tr th:each="indice : ${listaFarmacia}">
 						<td th:text="${indice.idFarmacia}"></td>
 						<td th:text="${indice.nombreFarmacia}"></td>
-						<td th:text="${indice.direccion}"></td>
 						<td th:text="${indice.ciudad}"></td>
+						<td th:text="${indice.direccion}"></td>
 						<td>
-							<a href="" class="btn btn-primary" title="Editar">
+							<a th:href="@{/farmacia/editar/{idFarmacia}(idFarmacia=${indice.idFarmacia})}" 
+							class="btn btn-primary" title="Editar">
 							<i class="far fa-edit"></i></a> 
 							<a href="" class="btn btn-danger" title="Eliminar">
 							<i class="far fa-trash-alt"></i></a>

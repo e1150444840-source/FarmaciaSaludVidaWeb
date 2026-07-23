@@ -38,7 +38,8 @@
 						<td th:text="${indice.iva}"></td>
 						<td th:text="${indice.total}"></td>
 						<td>
-							<a href="" class="btn btn-primary" title="Editar">
+							<a th:href="@{/venta/editar/{idVenta}(idVenta=${indice.idVenta})}"
+							 class="btn btn-primary" title="Editar">
 							<i class="far fa-edit"></i></a> 
 							<a href="" class="btn btn-danger" title="Eliminar">
 							<i class="far fa-trash-alt"></i></a>

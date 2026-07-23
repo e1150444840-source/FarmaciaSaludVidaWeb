@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -45,6 +46,17 @@ public class TipoClienteController {
 		
 		servicioTipoCliente.guardarTipoCliente(tipoCliente);
 		return "redirect:/tipoCliente";
+	}
+	
+	// EDITAR
+	// 1.- recuperar el registro utilizando el id
+	@GetMapping("editar/{idTipoCliente}")
+	public String editarTipoCliente(@PathVariable int idTipoCliente, Model model) {
+		// 2.- buscar registro por id
+		// 3.- envio al html el objeto en la BD
+		model.addAttribute("tipoCliente", servicioTipoCliente.buscarPorId(idTipoCliente));
+		// 4.- redireccione al formulario nuevo
+		return "/cliente/nuevotipocliente";
 	}
 
 }

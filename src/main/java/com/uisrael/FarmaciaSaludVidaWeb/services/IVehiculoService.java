@@ -10,4 +10,6 @@ public interface IVehiculoService {
 	List<VehiculoResponseDto> listarVehiculo();
 
 	void guardarVehiculo(VehiculoRequestDto nuevo);
+	
+	VehiculoResponseDto buscarPorId(int idVehiculo);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -45,5 +46,16 @@ public class CategoriaController {
 
 		servicioCategoria.guardarCategoria(categoria);
 		return "redirect:/categoria";
+	}
+	
+	// EDITAR
+	// 1.- recuperar el registro utilizando el id
+	@GetMapping("editar/{idCategoria}")
+	public String editarCategoria(@PathVariable int idCategoria, Model model) {
+		// 2.- buscar registro por id
+		// 3.- envio al html el objeto en la BD
+		model.addAttribute("categoria", servicioCategoria.buscarPorId(idCategoria));
+		// 4.- redireccione al formulario nuevo
+		return "/producto/nuevocategoria";
 	}
 }

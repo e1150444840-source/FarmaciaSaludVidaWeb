@@ -31,6 +31,12 @@ public class ProductoServiceImpl implements IProductoService {
 		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
 	}
 
+	@Override
+	public ProductoResponseDto buscarPorId(int idProducto) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/producto/buscarId/{idProducto}")
+				.build(idProducto)).retrieve().bodyToMono(ProductoResponseDto.class).block();
+	}
+
 
 
 }

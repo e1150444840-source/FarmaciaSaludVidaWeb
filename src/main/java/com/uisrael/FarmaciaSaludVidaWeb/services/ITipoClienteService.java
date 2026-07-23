@@ -8,6 +8,8 @@ import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.TipoClienteResponseDt
 public interface ITipoClienteService {
 
 	List<TipoClienteResponseDto> listarTipoCliente();
-	
+
 	void guardarTipoCliente(TipoClienteRequestDto nuevo);
+
+	TipoClienteResponseDto buscarPorId(int idTipoCliente);
 }

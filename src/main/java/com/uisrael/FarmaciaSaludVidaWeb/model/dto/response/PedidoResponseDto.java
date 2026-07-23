@@ -2,14 +2,17 @@ package com.uisrael.FarmaciaSaludVidaWeb.model.dto.response;
 
 import java.time.LocalDate;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VehiculoRequestDto;
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VentaRequestDto;
+
 public class PedidoResponseDto {
 
 	private int idPedido;
 	private LocalDate fechaPedido;
 	private String estadoPedido;
 	private String direccionPedido;
-	// private VentaEntity fkVenta;
-	// private VehiculoEntity fkVehiculo;
+	private VentaRequestDto fkVenta;
+	private VehiculoRequestDto fkVehiculo;
 
 	public int getIdPedido() {
 		return idPedido;
@@ -43,15 +46,19 @@ public class PedidoResponseDto {
 		this.direccionPedido = direccionPedido;
 	}
 
-	/*
-	 * public VentaEntity getFkVenta() { return fkVenta; }
-	 * 
-	 * public void setFkVenta(VentaEntity fkVenta) { this.fkVenta = fkVenta; }
-	 * 
-	 * public VehiculoEntity getFkVehiculo() { return fkVehiculo; }
-	 * 
-	 * public void setFkVehiculo(VehiculoEntity fkVehiculo) { this.fkVehiculo =
-	 * fkVehiculo; }
-	 */
+	public VentaRequestDto getFkVenta() {
+		return fkVenta;
+	}
 
+	public void setFkVenta(VentaRequestDto fkVenta) {
+		this.fkVenta = fkVenta;
+	}
+
+	public VehiculoRequestDto getFkVehiculo() {
+		return fkVehiculo;
+	}
+
+	public void setFkVehiculo(VehiculoRequestDto fkVehiculo) {
+		this.fkVehiculo = fkVehiculo;
+	}
 }

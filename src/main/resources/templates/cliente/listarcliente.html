@@ -40,9 +40,9 @@
 						<td th:text="${indice.direccionCliente}"></td>
 						<td th:text="${indice.correoCliente}"></td>
 						<td>
-							<a href="" class="btn btn-primary" title="Editar">
-							<i class="far fa-edit"></i></a> 
-							<a href="" class="btn btn-danger" title="Eliminar">
+							<a th:href="@{/cliente/editar/{idCliente}(idCliente=${indice.idCliente})}"
+							class="btn btn-primary" title="Editar"> <i
+								class="far fa-edit"></i></a> <a href="" class="btn btn-danger" title="Eliminar">
 							<i class="far fa-trash-alt"></i></a>
 						</td>
 					</tr>

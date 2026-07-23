@@ -31,4 +31,10 @@ public class InventarioServiceImpl implements IInventarioService {
 		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
 		
 	}
+
+	@Override
+	public InventarioResponseDto buscarPorId(int idInventario) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/inventario/buscarId/{idInventario}")
+				.build(idInventario)).retrieve().bodyToMono(InventarioResponseDto.class).block();
+	}
 }

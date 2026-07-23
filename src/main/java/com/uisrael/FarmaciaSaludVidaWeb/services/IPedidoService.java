@@ -10,4 +10,6 @@ public interface IPedidoService {
 	List<PedidoResponseDto> listarPedido();
 	
 	void guardarPedido(PedidoRequestDto nuevo);
+	
+	PedidoResponseDto buscarPorId(int idPedido);
 }

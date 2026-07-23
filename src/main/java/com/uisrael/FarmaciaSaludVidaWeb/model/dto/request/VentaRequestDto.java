@@ -13,6 +13,6 @@ public class VentaRequestDto {
 	private double subtotal;
 	private double iva;
 	private double total;
-	// private ClienteEntity fkCliente;
-	// private UsuarioEntity fkUsuario;
+	private ClienteRequestDto fkCliente;
+	private UsuarioRequestDto fkUsuario;
 }

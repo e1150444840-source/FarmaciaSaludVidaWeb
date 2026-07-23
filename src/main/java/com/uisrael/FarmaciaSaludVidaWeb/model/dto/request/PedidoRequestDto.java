@@ -11,7 +11,7 @@ public class PedidoRequestDto {
 	private LocalDate fechaPedido;
 	private String estadoPedido;
 	private String direccionPedido;
-	//private VentaEntity fkVenta;
-	//private VehiculoEntity fkVehiculo;
+	private VentaRequestDto fkVenta;
+	private VehiculoRequestDto fkVehiculo;
 
 }

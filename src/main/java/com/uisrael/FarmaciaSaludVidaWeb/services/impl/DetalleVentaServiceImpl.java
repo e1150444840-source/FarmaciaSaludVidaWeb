@@ -32,4 +32,10 @@ public class DetalleVentaServiceImpl implements IDetalleVentaService {
 		
 	}
 
+	@Override
+	public DetalleVentaResponseDto buscarPorId(int idDetalleVenta) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/detalleVenta/buscarId/{idDetalleVenta}")
+				.build(idDetalleVenta)).retrieve().bodyToMono(DetalleVentaResponseDto.class).block();
+	}
+
 }

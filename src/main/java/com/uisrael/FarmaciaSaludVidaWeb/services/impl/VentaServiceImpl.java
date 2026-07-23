@@ -31,4 +31,10 @@ public class VentaServiceImpl implements IVentaService {
 		.bodyValue(nuevo).retrieve().toBodilessEntity().block();	
 	}
 
+	@Override
+	public VentaResponseDto buscarPorId(int idVenta) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/venta/buscarId/{idVenta}")
+				.build(idVenta)).retrieve().bodyToMono(VentaResponseDto.class).block();
+	}
+
 }

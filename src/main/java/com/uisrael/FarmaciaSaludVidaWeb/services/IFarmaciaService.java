@@ -10,4 +10,7 @@ public interface IFarmaciaService {
 	List<FarmaciaResponseDto> listarFarmacia();
 
 	void guardarFarmacia(FarmaciaRequestDto nuevo);
+	
+	FarmaciaResponseDto buscarPorId(int idFarmacia);
+
 }

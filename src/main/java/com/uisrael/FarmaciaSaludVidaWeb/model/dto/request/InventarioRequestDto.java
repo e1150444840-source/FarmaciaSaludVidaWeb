@@ -7,6 +7,6 @@ public class InventarioRequestDto {
 
 	private int idInventario;
 	private int stockActual;
-	//private LoteEntity fkLote;
-	//private FarmaciaEntity fkFarmacia;
+	private LoteRequestDto fkLote;
+	private FarmaciaRequestDto fkFarmacia;
 }

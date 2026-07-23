@@ -19,5 +19,5 @@ public class ClienteRequestDto {
 
 	private String correoCliente;
 
-	//private TipoClienteEntity fkTipoCliente;
+	private TipoClienteRequestDto fkTipoCliente;
 }

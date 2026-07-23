@@ -32,4 +32,10 @@ public class TipoClienteServiceImpl implements ITipoClienteService {
 		
 	}
 
+	@Override
+	public TipoClienteResponseDto buscarPorId(int idTipoCliente) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/tipoCliente/buscarId/{idTipoCliente}")
+				.build(idTipoCliente)).retrieve().bodyToMono(TipoClienteResponseDto.class).block();
+	}
+
 }

@@ -11,4 +11,6 @@ public interface ILaboratorioService {
 	List<LaboratorioResponseDto> listarLaboratorio();
 
 	void guardarLaboratorio(LaboratorioRequestDto nuevo);
+	
+	LaboratorioResponseDto buscarPorId(int idLaboratorio);
 }

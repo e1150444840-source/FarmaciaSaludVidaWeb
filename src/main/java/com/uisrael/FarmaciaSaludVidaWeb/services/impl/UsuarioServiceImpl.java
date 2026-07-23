@@ -32,4 +32,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		
 	}
 
+	@Override
+	public UsuarioResponseDto buscarPorId(int idUsuario) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/usuario/buscarId/{idUsuario}")
+				.build(idUsuario)).retrieve().bodyToMono(UsuarioResponseDto.class).block();
+	}
+
 }

@@ -32,4 +32,10 @@ public class LoteServiceImpl implements ILoteService {
 		
 	}
 
+	@Override
+	public LoteResponseDto buscarPorId(int idLote) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/lote/buscarId/{idLote}")
+				.build(idLote)).retrieve().bodyToMono(LoteResponseDto.class).block();
+	}
+
 }

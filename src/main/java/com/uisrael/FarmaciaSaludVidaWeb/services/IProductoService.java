@@ -11,4 +11,6 @@ public interface IProductoService {
 	List<ProductoResponseDto> listarProducto();
 
 	void guardarProducto(ProductoRequestDto nuevo);
+	
+	ProductoResponseDto buscarPorId(int idProducto);
 }

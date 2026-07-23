@@ -32,4 +32,10 @@ public class LaboratorioServiceImpl implements ILaboratorioService {
 
 	}
 
+	@Override
+	public LaboratorioResponseDto buscarPorId(int idLaboratorio) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/laboratorio/buscarId/{idLaboratorio}")
+				.build(idLaboratorio)).retrieve().bodyToMono(LaboratorioResponseDto.class).block();
+	}
+
 }

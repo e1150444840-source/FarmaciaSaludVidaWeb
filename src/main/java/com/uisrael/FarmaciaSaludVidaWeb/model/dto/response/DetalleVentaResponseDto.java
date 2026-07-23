@@ -1,12 +1,15 @@
 package com.uisrael.FarmaciaSaludVidaWeb.model.dto.response;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.InventarioRequestDto;
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VentaRequestDto;
+
 public class DetalleVentaResponseDto {
 
 	private int idDetalleVenta;
 	private int cantidad;
 	private double precioUnitario;
-	//private VentaEntity fkVenta;
-	//private InventarioEntity fkInventario;
+	private VentaRequestDto fkVenta;
+	private InventarioRequestDto fkInventario;
 
 	public int getIdDetalleVenta() {
 		return idDetalleVenta;
@@ -32,20 +35,21 @@ public class DetalleVentaResponseDto {
 		this.precioUnitario = precioUnitario;
 	}
 
-	/*public VentaEntity getFkVenta() {
+	public VentaRequestDto getFkVenta() {
 		return fkVenta;
 	}
 
-	public void setFkVenta(VentaEntity fkVenta) {
+	public void setFkVenta(VentaRequestDto fkVenta) {
 		this.fkVenta = fkVenta;
 	}
 
-	public InventarioEntity getFkInventario() {
+	public InventarioRequestDto getFkInventario() {
 		return fkInventario;
 	}
 
-	public void setFkInventario(InventarioEntity fkInventario) {
+	public void setFkInventario(InventarioRequestDto fkInventario) {
 		this.fkInventario = fkInventario;
-	}*/
+	}
+
 
 }

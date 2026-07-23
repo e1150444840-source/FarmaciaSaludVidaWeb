@@ -32,4 +32,10 @@ public class CategoriaServiceImpl implements ICategoriaService {
 				
 	}
 
+	@Override
+	public CategoriaResponseDto buscarPorId(int idCategoria) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/categoria/buscarId/{idCategoria}")
+				.build(idCategoria)).retrieve().bodyToMono(CategoriaResponseDto.class).block();
+	}
+
 }

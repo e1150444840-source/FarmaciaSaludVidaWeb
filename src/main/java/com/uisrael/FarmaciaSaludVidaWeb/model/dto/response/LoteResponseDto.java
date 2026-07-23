@@ -2,13 +2,15 @@ package com.uisrael.FarmaciaSaludVidaWeb.model.dto.response;
 
 import java.time.LocalDate;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.ProductoRequestDto;
+
 public class LoteResponseDto {
 
 	private int idLote;
 	private String numeroLote;
 	private LocalDate fechaCaducidad;
 	private LocalDate fechaIngreso;
-	//private ProductoEntity fkProducto;
+	private ProductoRequestDto fkProducto;
 
 	public int getIdLote() {
 		return idLote;
@@ -42,12 +44,12 @@ public class LoteResponseDto {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	/*public ProductoEntity getFkProducto() {
+	public ProductoRequestDto getFkProducto() {
 		return fkProducto;
 	}
 
-	public void setFkProducto(ProductoEntity fkProducto) {
+	public void setFkProducto(ProductoRequestDto fkProducto) {
 		this.fkProducto = fkProducto;
-	}*/
+	}
 
 }

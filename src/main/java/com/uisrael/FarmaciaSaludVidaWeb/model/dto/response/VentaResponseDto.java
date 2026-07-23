@@ -2,6 +2,9 @@ package com.uisrael.FarmaciaSaludVidaWeb.model.dto.response;
 
 import java.time.LocalDate;
 
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.ClienteRequestDto;
+import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.UsuarioRequestDto;
+
 public class VentaResponseDto {
 
 	private int idVenta;
@@ -10,8 +13,8 @@ public class VentaResponseDto {
 	private double subtotal;
 	private double iva;
 	private double total;
-	//private ClienteEntity fkCliente;
-	//private UsuarioEntity fkUsuario;
+	private ClienteRequestDto fkCliente;
+	private UsuarioRequestDto fkUsuario;
 
 	public int getIdVenta() {
 		return idVenta;
@@ -61,20 +64,20 @@ public class VentaResponseDto {
 		this.total = total;
 	}
 
-	/*public ClienteEntity getFkCliente() {
+	public ClienteRequestDto getFkCliente() {
 		return fkCliente;
 	}
 
-	public void setFkCliente(ClienteEntity fkCliente) {
+	public void setFkCliente(ClienteRequestDto fkCliente) {
 		this.fkCliente = fkCliente;
 	}
 
-	public UsuarioEntity getFkUsuario() {
+	public UsuarioRequestDto getFkUsuario() {
 		return fkUsuario;
 	}
 
-	public void setFkUsuario(UsuarioEntity fkUsuario) {
+	public void setFkUsuario(UsuarioRequestDto fkUsuario) {
 		this.fkUsuario = fkUsuario;
-	}*/
+	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,5 +45,16 @@ public class PedidoController {
 	public String guardarPedido(@ModelAttribute PedidoRequestDto pedido) {
 		servicioPedido.guardarPedido(pedido);
 		return "redirect:/pedido";
+	}
+	
+	// EDITAR
+	// 1.- recuperar el registro utilizando el id
+	@GetMapping("editar/{idPedido}")
+	public String editarPedido(@PathVariable int idPedido, Model model) {
+		// 2.- buscar registro por id
+		// 3.- envio al html el objeto en la BD
+		model.addAttribute("pedido", servicioPedido.buscarPorId(idPedido));
+		// 4.- redireccione al formulario nuevo
+		return "/pedido/nuevopedido";
 	}
 }

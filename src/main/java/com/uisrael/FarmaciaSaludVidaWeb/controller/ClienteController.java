@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +28,7 @@ public class ClienteController {
 		this.servicioCliente = servicioCliente;
 	}
 
+	// LISTAR CLIENTE
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<ClienteResponseDto> resultadoDB = servicioCliente.listarCliente();
@@ -34,16 +36,29 @@ public class ClienteController {
 		return "/cliente/listarcliente"; // ruta fisica de la pagina
 	}
 
+	// CREAR NUEVO
 	@GetMapping("/nuevoCliente")
 	public String crearCliente(Model model) {
 		model.addAttribute("cliente", new ClienteRequestDto());
 		return "/cliente/nuevocliente";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
 	public String guardarCliente(@ModelAttribute ClienteRequestDto cliente) {
 
 		servicioCliente.guardarCliente(cliente);
-		return "redirect:/listarcliente";
+		return "redirect:/cliente";
+	}
+
+	// EDITAR
+	// 1.- recuperar el registro utilizando el id
+	@GetMapping("editar/{idCliente}")
+	public String editarCliente(@PathVariable int idCliente, Model model) {
+		// 2.- buscar registro por id
+		// 3.- envio al html el objeto en la BD
+		model.addAttribute("cliente", servicioCliente.buscarPorId(idCliente));
+		// 4.- redireccione al formulario nuevo
+		return "/cliente/nuevocliente";
 	}
 }

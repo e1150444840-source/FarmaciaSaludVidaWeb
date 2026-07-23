@@ -11,4 +11,6 @@ public interface IVentaService {
 	List<VentaResponseDto> listarVenta();
 	
 	void guardarVenta(VentaRequestDto nuevo);
+	
+	VentaResponseDto buscarPorId(int idVenta);
 }

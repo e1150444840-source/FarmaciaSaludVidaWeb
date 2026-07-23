@@ -15,7 +15,7 @@
 		<h4 class="card-title">NUEVA CATEGORÍA</h4>
 		<form th:action="@{/categoria/guardar}" th:object="${categoria}" method="post">
 			<div class="mb-3">
-				<input type="hidden" th:field="*{idCategoria}" value="0" />
+				<input type="hidden" class="form-label" id="idCategoria" th:field="*{idCategoria}"/>
 			</div>
 			<div class="mb-3">
 				<label for="nombre" class="form-label">NOMBRE CATEGORÍA</label> 

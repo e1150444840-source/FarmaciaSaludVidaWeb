@@ -32,5 +32,11 @@ public class PedidoServiceImpl implements IPedidoService {
 		
 	}
 
+	@Override
+	public PedidoResponseDto buscarPorId(int idPedido) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/pedido/buscarId/{idPedido}")
+				.build(idPedido)).retrieve().bodyToMono(PedidoResponseDto.class).block();
+	}
+
 	
 }

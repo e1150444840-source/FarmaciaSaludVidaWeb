@@ -32,4 +32,11 @@ public class FarmaciaServiceImpl implements IFarmaciaService {
 		
 	}
 
+	@Override
+	public FarmaciaResponseDto buscarPorId(int idFarmacia) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/farmacia/buscarId/{idFarmacia}")
+				.build(idFarmacia)).retrieve().bodyToMono(FarmaciaResponseDto.class).block();
+	}
+	
+
 }

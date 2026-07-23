@@ -31,4 +31,9 @@ public class VehiculoServiceImpl implements IVehiculoService {
 		.bodyValue(nuevo).retrieve().toBodilessEntity().block();		
 	}
 
+	@Override
+	public VehiculoResponseDto buscarPorId(int idVehiculo) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/vehiculo/buscarId/{idVehiculo}")
+				.build(idVehiculo)).retrieve().bodyToMono(VehiculoResponseDto.class).block();
+	}
 }

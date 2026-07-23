@@ -11,5 +11,5 @@ public class LoteRequestDto {
 	private String numeroLote;
 	private LocalDate fechaCaducidad;
 	private LocalDate fechaIngreso;
-	// private ProductoEntity fkProducto;
+	private ProductoRequestDto fkProducto;
 }

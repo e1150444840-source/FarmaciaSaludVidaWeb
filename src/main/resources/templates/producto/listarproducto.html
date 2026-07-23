@@ -32,7 +32,8 @@
 						<td th:text="${indice.nombreProducto}"></td>
 						<td th:text="${indice.descripcion}"></td>
 						<td>
-							<a href="" class="btn btn-primary" title="Editar">
+							<a th:href="@{/producto/editar/{idProducto}(idProducto=${indice.idProducto})}"
+							 class="btn btn-primary" title="Editar">
 							<i class="far fa-edit"></i></a> 
 							<a href="" class="btn btn-danger" title="Eliminar">
 							<i class="far fa-trash-alt"></i></a>

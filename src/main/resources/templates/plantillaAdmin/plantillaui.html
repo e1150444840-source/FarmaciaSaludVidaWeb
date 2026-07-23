@@ -12,17 +12,14 @@
 <meta name="author" content="">
 
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="50x50"
-	href="../assets/images/favicon.ico">
+<link rel="icon" type="image/png" sizes="50x50" href="../assets/images/favicon.ico">
 <title>Inicio</title>
 <!-- This page plugin CSS -->
 <!-- <link href="../assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet"> -->
-<link rel="stylesheet"
-	href="../assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css">
-<link rel="stylesheet"
-	href="../assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css">
+<link rel="stylesheet" th:href="@{/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css}">
 <!-- Custom CSS -->
-<link href="../dist/css/style.min.css" rel="stylesheet">
+<link th:href="@{/dist/css/style.min.css}" rel="stylesheet">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -63,7 +60,8 @@
 					<div class="navbar-brand">
 						<!-- Logo icon -->
 						<a href="index.html"> <img
-							src="../assets/images/logoHorizontal1.png" alt="" class="img-fluid">
+							th:src="@{/assets/images/logoHorizontal1.png}" alt=""
+							class="img-fluid">
 						</a>
 					</div>
 					<!-- ============================================================== -->
@@ -97,7 +95,7 @@
 							class="nav-link dropdown-toggle" href="javascript:void(0)"
 							data-bs-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <img
-								src="../assets/images/users/profile-pic.jpg" alt="user"
+								th:src="@{/assets/images/users/profile-pic.jpg}" alt="user"
 								class="rounded-circle" width="40"> <span
 								class="ms-2 d-none d-lg-inline-block"><span>Hola,</span>
 									<span class="text-dark">Carlos Raul</span> <i
@@ -148,157 +146,183 @@
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Menú</span></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="file-text" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class="fa fa-address-card" aria-hidden="true"></i><span
 								class="hide-menu">Clientes</span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/cliente}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Clientes </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/cliente/nuevoCliente}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Clientes</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Clientes </span></a></li>
+								<li class="sidebar-item"><a	th:href="@{/cliente/nuevoCliente}" 
+									class="sidebar-link"><span class="hide-menu">
+									<i class="fas fa-plus"></i> 
+									Nuevo Clientes</span></a></li>
 								<li class="sidebar-item"><a th:href="@{/tipoCliente}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Tipo Clientes </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/tipoCliente/nuevoTipoCliente}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Tipo Clientes</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Tipo Clientes </span></a></li>
+								<li class="sidebar-item"><a
+									th:href="@{/tipoCliente/nuevoTipoCliente}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i> 
+									Nuevo Tipo Clientes</span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="file-text" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class="fas fa-medkit" aria-hidden="true"></i><span
 								class="hide-menu">Farmacia</span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/farmacia}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Farmacia </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/farmacia/nuevoFarmacia}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Farmacia</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Farmacia </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/farmacia/nuevoFarmacia}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i> 
+									Nuevo Farmacia</span></a></li>
 								<li class="sidebar-item"><a th:href="@{/laboratorio}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Laboratorio</span></a></li>
-								<li class="sidebar-item"><a th:href="@{/laboratorio/nuevoLaboratorio}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Laboratorio</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Laboratorio</span></a></li>
+								<li class="sidebar-item"><a th:href="@{/laboratorio/nuevoLaboratorio}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nuevo Laboratorio</span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="file-text" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i data-feather="file-text" class="feather-icon"></i><span
 								class="hide-menu">Inventario</span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/inventario}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Inventario </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/inventario/nuevoInventario}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Inventario</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Inventario </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/inventario/nuevoInventario}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nuevo Inventario</span></a></li>
 								<li class="sidebar-item"><a th:href="@{/lote}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Lote</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Lote</span></a></li>
 								<li class="sidebar-item"><a th:href="@{/lote/nuevoLote}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Lote</span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nuevo Lote</span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="grid" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class=" fas fa-edit" aria-hidden="true"></i><span
 								class="hide-menu">Pedido</span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/pedido}"
-									class="sidebar-link"><span class="hide-menu">Lista
-											Pedido</span></a></li>
-								<li class="sidebar-item"><a th:href="@{/pedido/nuevoPedido}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Pedido </span></a></li>
+									class="sidebar-link"><span class="hide-menu">
+									<i class=" fas fa-check"></i>
+									Lista Pedido</span></a></li>
+								<li class="sidebar-item"><a th:href="@{/pedido/nuevoPedido}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nuevo Pedido </span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="bar-chart" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class="fas fa-hand-holding-usd" aria-hidden="true"></i><span
 								class="hide-menu">Producto </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/producto}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Producto </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/producto/nuevoProducto}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Producto </span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Producto </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/producto/nuevoProducto}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nuevo Producto </span></a></li>
 								<li class="sidebar-item"><a th:href="@{/categoria}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Categoría </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/categoria/nuevoCategoria}"
-									class="sidebar-link"><span class="hide-menu"> Nueva
-											Categoría </span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Categoría </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/categoria/nuevoCategoria}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nueva Categoría </span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="bar-chart" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class="fas fa-user" aria-hidden="true"></i><span
 								class="hide-menu">Usuario </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/usuario}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Usuario </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/usuario/nuevoUsuario}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Usuario </span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Usuario </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/usuario/nuevoUsuario}" 
+									class="sidebar-link"><span class="hide-menu">
+									<i class="fas fa-plus"></i>
+									Nuevo Usuario </span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="bar-chart" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class="fas fa-truck" aria-hidden="true"></i><span
 								class="hide-menu">Vehículo </span></a>
 							<ul aria-expanded="false"
-								class="collapse  first-level base-level-line">
+								class="collapse first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/vehiculo}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Vehículo </span></a></li>
-								<li class="sidebar-item"><a th:href="@{/vehiculo/nuevoVehiculo}"
-									class="sidebar-link"><span class="hide-menu"> Nuevo
-											Vehículo </span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Vehículo </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/vehiculo/nuevoVehiculo}" 
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nuevo Vehículo </span></a></li>
 							</ul></li>
 						<li class="sidebar-item"><a class="sidebar-link has-arrow"
-							href="javascript:void(0)" aria-expanded="false"><i
-								data-feather="box" class="feather-icon"></i><span
+							href="javascript:void(0)" aria-expanded="false">
+							<i class="fas fa-chart-line" aria-hidden="true"></i><span
 								class="hide-menu">Ventas </span></a>
 							<ul aria-expanded="false"
 								class="collapse  first-level base-level-line">
 								<li class="sidebar-item"><a th:href="@{/venta}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Ventas </span></a></li>
-								<li class="sidebar-item"><a  th:href="@{/venta/nuevoVenta}"
-									class="sidebar-link"><span class="hide-menu"> Nueva
-											Ventas </span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Ventas </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/venta/nuevoVenta}"
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nueva Ventas </span></a></li>
 								<li class="sidebar-item"><a th:href="@{/detalleVenta}"
-									class="sidebar-link"><span class="hide-menu"> Lista
-											Detalle Ventas </span></a></li>
-								<li class="sidebar-item"><a  th:href="@{/detalleVenta/nuevoDetalleVenta}"
-									class="sidebar-link"><span class="hide-menu"> Nueva
-											Detalle Ventas </span></a></li>
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class=" fas fa-check"></i>
+									Lista Detalle Ventas </span></a></li>
+								<li class="sidebar-item"><a th:href="@{/detalleVenta/nuevoDetalleVenta}"
+									class="sidebar-link"><span class="hide-menu"> 
+									<i class="fas fa-plus"></i>
+									Nueva Detalle Ventas </span></a></li>
 							</ul></li>
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Autentificación
 						</span></li>
 
 						<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-							href="authentication-login1.html" aria-expanded="false"><i
-								data-feather="lock" class="feather-icon"></i><span
-								class="hide-menu">Login </span></a></li>
+							th:href="@{/usuario/login}" aria-expanded="false">
+							<i data-feather="lock" class="feather-icon"></i>
+							<span class="hide-menu">Login </span></a></li>
 						<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-							href="authentication-register1.html" aria-expanded="false"><i
-								data-feather="lock" class="feather-icon"></i><span
-								class="hide-menu">Register </span></a></li>
-
+							th:href="@{/detalleVenta/nuevoDetalleVenta}" aria-expanded="false">
+							<i data-feather="lock" class="feather-icon"></i>
+							<span class="hide-menu">Register </span></a></li>
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
 
 						<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-							href="authentication-login1.html" aria-expanded="false"><i
+							href="authentication-login.html" aria-expanded="false"><i
 								data-feather="log-out" class="feather-icon"></i><span
 								class="hide-menu">Logout</span></a></li>
 					</ul>
@@ -355,30 +379,27 @@
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
-	<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+	<script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
 	<!-- Bootstrap tether Core JavaScript -->
-	<script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
-	<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+	<script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 	<!-- apps -->
 	<!-- apps -->
-	<script src="../dist/js/app-style-switcher.js"></script>
-	<script src="../dist/js/feather.min.js"></script>
+	<script th:src="@{/dist/js/app-style-switcher.js}"></script>
+	<script th:src="@{/dist/js/feather.min.js}"></script>
 	<!-- slimscrollbar scrollbar JavaScript -->
-	<script
-		src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-	<script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+	<script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
+	<script th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
 	<!--Wave Effects -->
 	<!-- themejs -->
 	<!--Menu sidebar -->
-	<script src="../dist/js/sidebarmenu.js"></script>
+	<script th:src="@{/dist/js/sidebarmenu.js}"></script>
 	<!--Custom JavaScript -->
-	<script src="../dist/js/custom.min.js"></script>
+	<script th:src="@{/dist/js/custom.min.js}"></script>
 	<!--This page plugins -->
-	<script
-		src="../assets/extra-libs/datatables.net/js/jquery.dataTables.min.js"></script>
-	<script
-		src="../assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
-	<script src="../dist/js/pages/datatable/datatable-basic.init.js"></script>
+	<script th:src="@{/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js}"></script>
+	<script th:src="@{/dist/js/pages/datatable/datatable-basic.init.js}"></script>
 </body>
 
 </html>

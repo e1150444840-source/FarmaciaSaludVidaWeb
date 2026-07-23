@@ -11,4 +11,6 @@ public interface IInventarioService {
 	List<InventarioResponseDto> listarInventario();
 	
 	void guardarInventario(InventarioRequestDto nuevo);
+	
+	InventarioResponseDto buscarPorId(int idInventario);
 }

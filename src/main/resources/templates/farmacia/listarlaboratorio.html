@@ -31,7 +31,8 @@
 						<td th:text="${indice.nombreLaboratorio}"></td>
 						<td th:text="${indice.telefonoLaboratorio}"></td>
 						<td>
-							<a href="" class="btn btn-primary" title="Editar">
+							<a th:href="@{/laboratorio/editar/{idLaboratorio}(idLaboratorio=${indice.idLaboratorio})}" 
+							 class="btn btn-primary" title="Editar">
 							<i class="far fa-edit"></i></a> 
 							<a href="" class="btn btn-danger" title="Eliminar">
 							<i class="far fa-trash-alt"></i></a>

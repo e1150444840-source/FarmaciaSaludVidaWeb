@@ -10,5 +10,7 @@ public interface IClienteService {
 	List<ClienteResponseDto> listarCliente();
 
 	void guardarCliente(ClienteRequestDto nuevo);
+	
+	ClienteResponseDto buscarPorId(int idCliente);
 
 }

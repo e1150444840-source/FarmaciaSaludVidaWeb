@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -46,4 +47,14 @@ public class LaboratorioController {
 		return "redirect:/laboratorio";
 	}
 
+	// EDITAR
+	// 1.- recuperar el registro utilizando el id
+	@GetMapping("editar/{idLaboratorio}")
+	public String editarLaboratorio(@PathVariable int idLaboratorio, Model model) {
+		// 2.- buscar registro por id
+		// 3.- envio al html el objeto en la BD
+		model.addAttribute("laboratorio", servicioLaboratorio.buscarPorId(idLaboratorio));
+		// 4.- redireccione al formulario nuevo
+		return "/farmacia/nuevolaboratorio";
+	}
 }

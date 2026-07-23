@@ -11,4 +11,6 @@ public interface ILoteService {
 	List<LoteResponseDto> listarLote();
 	
 	void guardarLote(LoteRequestDto nuevo);
+	
+	LoteResponseDto buscarPorId(int idLote);
 }

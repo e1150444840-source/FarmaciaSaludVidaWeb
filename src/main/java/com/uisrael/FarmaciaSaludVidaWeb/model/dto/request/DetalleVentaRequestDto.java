@@ -8,6 +8,6 @@ public class DetalleVentaRequestDto {
 	private int idDetalleVenta;
 	private int cantidad;
 	private double precioUnitario;
-	// private VentaEntity fkVenta;
-	// private InventarioEntity fkInventario;
+	private VentaRequestDto fkVenta;
+	private InventarioRequestDto fkInventario;
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,6 +45,17 @@ public class LoteController {
 	public String guardarLote(@ModelAttribute LoteRequestDto lote) {
 		servicioLote.guardarLote(lote);
 		return "redirect:/lote";
+	}
+	
+	// EDITAR
+	// 1.- recuperar el registro utilizando el id
+	@GetMapping("editar/{idLote}")
+	public String editarLote(@PathVariable int idLote, Model model) {
+		// 2.- buscar registro por id
+		// 3.- envio al html el objeto en la BD
+		model.addAttribute("lote", servicioLote.buscarPorId(idLote));
+		// 4.- redireccione al formulario nuevo
+		return "/inventario/nuevolote";
 	}
 
 }

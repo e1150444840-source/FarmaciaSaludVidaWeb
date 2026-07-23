@@ -8,6 +8,6 @@ public class ProductoRequestDto {
 	private int idProducto;
 	private String nombreProducto;
 	private String descripcion;
-	//private CategoriaEntity fkCategoria;
-	//private LaboratorioEntity fkLaboratorio;
+	private CategoriaRequestDto fkCategoria;
+	private LaboratorioRequestDto fkLaboratorio;
 }

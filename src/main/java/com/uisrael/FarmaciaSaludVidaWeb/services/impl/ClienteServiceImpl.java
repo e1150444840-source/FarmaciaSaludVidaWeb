@@ -32,4 +32,12 @@ public class ClienteServiceImpl implements IClienteService {
 		
 	}
 
+	@Override
+	public ClienteResponseDto buscarPorId(int idCliente) {
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/cliente/buscarId/{idCliente}")
+				.build(idCliente)).retrieve().bodyToMono(ClienteResponseDto.class).block();
+	}
+	
+	
+
 }

@@ -8,6 +8,6 @@ public class VehiculoRequestDto {
 	private int idVehiculo;
 	private String placa;
 	private String capacidad;
-	private  String estadoDisponibilidad;
+	private String estadoDisponibilidad;
 
 }
