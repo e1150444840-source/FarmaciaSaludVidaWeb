@@ -12,7 +12,12 @@
 
 	<!-- multi-column ordering -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">LISTA DE CATEGORÍA</h4>
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h4 class="card-title mb-0 fw-bold">LISTA DE CATEGORÍA</h4>
+			<a th:href="@{/categoria/nuevoCategoria}" class="btn btn-success"> <i
+				class="fas fa-plus me-1"></i> Nueva Categoría
+			</a>
+		</div>
 		<div class="table-responsive">
 			<table id="multi_col_order"
 				class="table border table-striped table-bordered text-nowrap"
@@ -29,12 +34,11 @@
 					<tr th:each="indice : ${listaCategoria}">
 						<td th:text="${indice.idCategoria}"></td>
 						<td th:text="${indice.nombreCategoria}"></td>
-						<td>
-						<a th:href="@{/categoria/editar/{idCategoria}(idCategoria=${indice.idCategoria})}"
+						<td><a
+							th:href="@{/categoria/editar/{idCategoria}(idCategoria=${indice.idCategoria})}"
 							class="btn btn-primary" title="Editar"> <i
 								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
-							title="Eliminar"> <i class="far fa-trash-alt"></i></a>
-						</td>
+							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
 					</tr>
 
 

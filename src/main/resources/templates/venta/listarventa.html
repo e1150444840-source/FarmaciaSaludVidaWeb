@@ -12,7 +12,12 @@
 
 	<!-- multi-column ordering -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">LISTA DE VENTAS</h4>
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h4 class="card-title mb-0 fw-bold">LISTA DE VENTAS</h4>
+			<a th:href="@{/venta/nuevoVenta}"
+				class="btn btn-success"> <i class="fas fa-plus me-1"></i> Nueva Venta
+			</a>
+		</div>
 		<div class="table-responsive">
 			<table id="multi_col_order"
 				class="table border table-striped table-bordered text-nowrap"
@@ -20,6 +25,8 @@
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>CLIENTE</th>
+						<th>USUARIO</th>
 						<th>CANAL DE VENTA</th>
 						<th>FECHA DE VENTA</th>
 						<th>SUBTOTAL</th>
@@ -32,18 +39,18 @@
 				<tbody>
 					<tr th:each="indice : ${listaVenta}">
 						<td th:text="${indice.idVenta}"></td>
+						<td th:text="${indice.fkCliente.nombreCliente}"></td>
+						<td th:text="${indice.fkUsuario.username}"></td>	
 						<td th:text="${indice.canalVenta}"></td>
 						<td th:text="${indice.fechaEmison}"></td>
 						<td th:text="${indice.subtotal}"></td>
 						<td th:text="${indice.iva}"></td>
 						<td th:text="${indice.total}"></td>
-						<td>
-							<a th:href="@{/venta/editar/{idVenta}(idVenta=${indice.idVenta})}"
-							 class="btn btn-primary" title="Editar">
-							<i class="far fa-edit"></i></a> 
-							<a href="" class="btn btn-danger" title="Eliminar">
-							<i class="far fa-trash-alt"></i></a>
-						</td>
+						<td><a
+							th:href="@{/venta/editar/{idVenta}(idVenta=${indice.idVenta})}"
+							class="btn btn-primary" title="Editar"> <i
+								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
+							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
 					</tr>
 
 

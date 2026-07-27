@@ -12,39 +12,137 @@
 
 	<!-- multi-column ordering -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">NUEVO CLIENTES</h4>
-		<form th:action="@{/cliente/guardar}" th:object="${cliente}" method="post">
-			<div class="mb-3">
-				<input type="hidden" class="form-label" id="idCiente" th:field="*{idCliente}" />
-			</div>
-			<div class="mb-3">
-				<label for="nombre" class="form-label">NOMBRE</label> 
-				<input type="text" class="form-control" id="nombre" th:field="*{nombreCliente}">
-			</div>
-			<div class="mb-3">
-				<label for="apellido" class="form-label">APELLIDO</label> 
-				<input	type="text" class="form-control" id="apellido" th:field="*{apellidoCliente}">
-			</div>
-			<div class="mb-3">
-				<label for="cedula" class="form-label">CÉDULA</label> 
-				<input type="text" class="form-control" id="cedula" th:field="*{ciCliente}">
-			</div>
-			<div class="mb-3">
-				<label for="telefono" class="form-label">TELÉFONO</label> 
-				<input type="text" class="form-control" id="telefono" th:field="*{telefonoCliente}">
-			</div>
-			<div class="mb-3">
-				<label for="direccion" class="form-label">DIRECCIÓN</label> 
-				<input type="text" class="form-control" id="direccion" th:field="*{direccionCliente}">
-			</div>
-			<div class="mb-3">
-				<label for="email" class="form-label">CORREO ELECTRÓNICO</label> 
-				<input type="email" class="form-control" id="email" 
-				aria-describedby="email" th:field="*{correoCliente}">
-			</div>
-			<button type="submit" class="btn btn-primary">GUARDAR</button>
-		</form>
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+				<!-- Tarjeta principal -->
+				<div class="card shadow-sm border-0 rounded-3 my-3">
 
+					<!-- Cabecera -->
+					<div class="card-header bg-primary text-white py-3 rounded-top">
+						<h5 class="card-title mb-0 fw-bold">
+							<i class="fas fa-user-plus me-2"></i> REGISTRO DE NUEVO CLIENTE
+						</h5>
+					</div>
+
+					<!-- Formulario -->
+					<div class="card-body p-4">
+						<form th:action="@{/cliente/guardar}" th:object="${cliente}"
+							method="post">
+							<div class="mb-3">
+								<input type="hidden" th:field="*{idCliente}" value="0" />
+							</div>
+							<div class="row g-3">
+								<!-- Nombre -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Nombre
+										<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-user text-muted"></i></span> <input type="text"
+											class="form-control" th:field="*{nombreCliente}"
+											placeholder="Ej. Juan" required>
+									</div>
+								</div>
+
+								<!-- Apellido -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Apellido
+										<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-user text-muted"></i></span> <input type="text"
+											class="form-control" th:field="*{apellidoCliente}"
+											placeholder="Ej. Pérez" required>
+									</div>
+								</div>
+
+								<!-- Cédula -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Cédula
+										/ Identificación <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-id-card text-muted"></i></span> <input type="text"
+											class="form-control" th:field="*{ciCliente}"
+											placeholder="Ej. 1700000000" maxlength="10" required>
+									</div>
+								</div>
+
+								<!-- Teléfono -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Teléfono</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-phone text-muted"></i></span> <input type="tel"
+											class="form-control" th:field="*{telefonoCliente}"
+											maxlength="10" placeholder="Ej. 0991234567">
+									</div>
+								</div>
+
+								<!-- Dirección -->
+								<div class="col-md-12">
+									<label class="form-label fw-bold text-secondary">Dirección</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-map-marker-alt text-muted"></i></span> <input
+											type="text" class="form-control"
+											th:field="*{direccionCliente}"
+											placeholder="Av. Principal y Secundaria N12-34">
+									</div>
+								</div>
+
+								<!-- Correo Electrónico -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Correo
+										Electrónico <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-envelope text-muted"></i></span> <input type="email"
+											class="form-control" th:field="*{correoCliente}"
+											placeholder="correo@ejemplo.com" required>
+									</div>
+								</div>
+
+								<!-- Tipo de Cliente -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Tipo
+										de Cliente <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-user-tag text-muted"></i></span> <select
+											class="form-select" th:field="*{fkTipoCliente.idTipoCliente}"
+											required>
+											<option value="0" disabled selected>-- Seleccione un
+												Tipo de Cliente --</option>
+											<option th:each="tipoCliente: ${listaTipoCliente}"
+												th:value="${tipoCliente.idTipoCliente}"
+												th:text="${tipoCliente.nombreTipoCliente}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Botones -->
+							<div
+								class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+								<a th:href="@{/cliente}" class="btn btn-outline-secondary px-4">
+									<i class="fas fa-times me-1"></i> Cancelar
+								</a>
+								<button type="submit" class="btn btn-primary px-4">
+									<i class="fas fa-save me-1"></i> Guardar Cliente
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

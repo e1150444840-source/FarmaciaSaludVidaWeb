@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.PedidoRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.PedidoResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IPedidoService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IVehiculoService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IVentaService;
 
 @Controller
 @RequestMapping("/pedido") // url
@@ -21,26 +23,40 @@ public class PedidoController {
 
 	@Autowired
 	private IPedidoService servicioPedido;
+	
+	@Autowired
+	private IVehiculoService servicioVehiculo;
+	
+	@Autowired
+	private IVentaService servicioVenta;
 
-	// CONSTRUCTOR
-	public PedidoController(IPedidoService servicioPedido) {
-		super();
+	// CONSTRUCTOR	
+	public PedidoController(IPedidoService servicioPedido, IVehiculoService servicioVehiculo,
+			IVentaService servicioVenta) {
+
 		this.servicioPedido = servicioPedido;
+		this.servicioVehiculo = servicioVehiculo;
+		this.servicioVenta = servicioVenta;
 	}
 
+	// LISTAR CLIENTE
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<PedidoResponseDto> resultadoDB = servicioPedido.listarPedido();
 		model.addAttribute("listaPedido", resultadoDB);
 		return "/pedido/listarpedido"; // ruta fisica de la pagina
 	}
-	
+
+	// CREAR NUEVO
 	@GetMapping("/nuevoPedido")
 	public String crearPedido(Model model) {
 		model.addAttribute("pedido", new PedidoRequestDto());
+		model.addAttribute("listaVehiculo", servicioVehiculo.listarVehiculo());
+		model.addAttribute("listaVenta", servicioVenta.listarVenta());
 		return "/pedido/nuevopedido";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
 	public String guardarPedido(@ModelAttribute PedidoRequestDto pedido) {
 		servicioPedido.guardarPedido(pedido);

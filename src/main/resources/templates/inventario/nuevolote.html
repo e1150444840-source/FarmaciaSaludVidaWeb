@@ -9,29 +9,101 @@
 </head>
 
 <body>
-
-	<!-- multi-column ordering -->
+	<!-- Formulario Registro Nuevo Lote -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">NUEVO LOTE</h4>
-		<form th:action="@{/lote/guardar}" th:object="${lote}" method="post">
-			<div class="mb-3">
-				<input type="hidden" th:field="*{idLote}" value="0" />
-			</div>
-			<div class="mb-3">
-				<label for="numero" class="form-label">NÚMERO DE LOTE</label> 
-				<input type="text" class="form-control" id="numero" th:field="*{numeroLote}">
-			</div>
-			<div class="mb-3">
-				<label for="fingreso" class="form-label">FECHA DE INGRESO</label> 
-				<input	type="text" class="form-control" id="fingreso" th:field="*{fechaIngreso}">
-			</div>
-			<div class="mb-3">
-				<label for="fcaducidad" class="form-label">FECHA DE CADUCIDAD</label> 
-				<input type="text" class="form-control" id="fcaducidad" th:field="*{fechaCaducidad}">
-			</div>
-			<button type="submit" class="btn btn-primary">GUARDAR</button>
-		</form>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<!-- Tarjeta principal -->
+				<div class="card shadow-sm border-0 rounded-3 my-3">
 
+					<!-- Cabecera de la tarjeta -->
+					<div class="card-header bg-primary text-white py-3 rounded-top">
+						<h5 class="card-title mb-0 fw-bold">
+							<i class="fas fa-boxes me-2"></i> NUEVO LOTE
+						</h5>
+					</div>
+
+					<!-- Cuerpo del formulario -->
+					<div class="card-body p-4">
+						<form th:action="@{/lote/guardar}" th:object="${lote}"
+							method="post">
+							<div class="mb-3">
+								<input type="hidden" th:field="*{idLote}" value="0" />
+							</div>
+							<div class="row g-3">
+								<!-- Número de Lote -->
+								<div class="col-md-12">
+									<label class="form-label fw-bold text-secondary">Número
+										de Lote <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-barcode text-muted"></i></span> <input type="text"
+											class="form-control" th:field="*{numeroLote}"
+											placeholder="Ej. LOT-2026-001" required>
+									</div>
+								</div>
+
+								<!-- Fecha de Ingreso -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Fecha
+										de Ingreso <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-calendar-alt text-muted"></i></span> <input
+											class="form-control" th:field="*{fechaIngreso}"
+											required>
+									</div>
+								</div>
+
+								<!-- Fecha de Caducidad -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Fecha
+										de Caducidad <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-calendar-times text-muted"></i></span> <input
+											 class="form-control" th:field="*{fechaCaducidad}"
+											required>
+									</div>
+								</div>
+								
+								<!-- Lote -->
+							<div class="col-md-12">
+								<label class="form-label fw-bold text-secondary">Producto
+									<span class="text-danger">*</span>
+								</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light"><i
+										class="fas fa-user-tag text-muted"></i></span> <select
+										class="form-select" th:field="*{fkProducto.idProducto}" required>
+										<option value="0" disabled selected>-- Seleccione un
+											Producto --</option>
+										<option th:each="producto: ${listaProducto}" 
+											th:value="${producto.idProducto}"
+											th:text="${producto.nombreProducto}"></option>
+									</select>
+								</div>
+							</div>
+
+							<!-- Botones de Acción -->
+							<div
+								class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+								<a th:href="@{/lote}" class="btn btn-outline-secondary px-4">
+									<i class="fas fa-times me-1"></i> Cancelar
+								</a>
+								<button type="submit" class="btn btn-primary px-4">
+									<i class="fas fa-save me-1"></i> Guardar
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

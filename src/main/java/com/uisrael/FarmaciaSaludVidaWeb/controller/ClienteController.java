@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.ClienteRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.ClienteResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IClienteService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.ITipoClienteService;
 
 @Controller
 @RequestMapping("/cliente") // url
@@ -21,11 +22,14 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService servicioCliente;
+	@Autowired
+	private ITipoClienteService servicioTipoCliente;
 
 	// CONSTRUCTOR
-	public ClienteController(IClienteService servicioCliente) {
-
+	public ClienteController(IClienteService servicioCliente, ITipoClienteService servicioTipoCliente) {
+	
 		this.servicioCliente = servicioCliente;
+		this.servicioTipoCliente = servicioTipoCliente;
 	}
 
 	// LISTAR CLIENTE
@@ -40,6 +44,7 @@ public class ClienteController {
 	@GetMapping("/nuevoCliente")
 	public String crearCliente(Model model) {
 		model.addAttribute("cliente", new ClienteRequestDto());
+		model.addAttribute("listaTipoCliente", servicioTipoCliente.listarTipoCliente());
 		return "/cliente/nuevocliente";
 	}
 
@@ -50,7 +55,7 @@ public class ClienteController {
 		servicioCliente.guardarCliente(cliente);
 		return "redirect:/cliente";
 	}
-
+	
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idCliente}")

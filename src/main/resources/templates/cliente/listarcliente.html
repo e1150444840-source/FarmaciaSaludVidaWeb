@@ -12,7 +12,13 @@
 
 	<!-- multi-column ordering -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">LISTA DE CLIENTES</h4>
+		<!-- Cabecera con Título y Botón Nuevo Cliente -->
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h4 class="card-title mb-0 fw-bold">LISTA DE CLIENTES</h4>
+			<a th:href="@{/cliente/nuevoCliente}" class="btn btn-success"> <i
+				class="fas fa-plus me-1"></i> Nuevo Cliente
+			</a>
+		</div>
 		<div class="table-responsive">
 			<table id="multi_col_order"
 				class="table border table-striped table-bordered text-nowrap"
@@ -22,6 +28,7 @@
 						<th>ID</th>
 						<th>NOMBRE</th>
 						<th>APELLIDO</th>
+						<th>TIPO CLIENTE</th>
 						<th>CÉDULA</th>
 						<th>TELÉFONO</th>
 						<th>DIRECCIÓN</th>
@@ -35,6 +42,7 @@
 						<td th:text="${indice.idCliente}"></td>
 						<td th:text="${indice.nombreCliente}"></td>
 						<td th:text="${indice.apellidoCliente}"></td>
+						<td th:text="${indice.fkTipoCliente.nombreTipoCliente}"></td>
 						<td th:text="${indice.ciCliente}"></td>
 						<td th:text="${indice.telefonoCliente}"></td>
 						<td th:text="${indice.direccionCliente}"></td>

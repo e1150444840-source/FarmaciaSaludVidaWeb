@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.LoteRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.LoteResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ILoteService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IProductoService;
 
 @Controller
 @RequestMapping("/lote") // url
@@ -21,13 +22,19 @@ public class LoteController {
 
 	@Autowired
 	private ILoteService servicioLote;
+	
+	@Autowired
+	private IProductoService servicioProducto;
 
 	// CONSTRUCTOR
-	public LoteController(ILoteService servicioLote) {
-
+	public LoteController(ILoteService servicioLote, IProductoService servicioProducto) {
+		
 		this.servicioLote = servicioLote;
+		this.servicioProducto = servicioProducto;
 	}
 
+
+	// LISTAR CLIENTE
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<LoteResponseDto> resultadoDB = servicioLote.listarLote();
@@ -35,12 +42,15 @@ public class LoteController {
 		return "/inventario/listarlote"; // ruta fisica de la pagina
 	}
 
+	// CREAR NUEVO
 	@GetMapping("/nuevoLote")
 	public String crearLote(Model model) {
 		model.addAttribute("lote", new LoteRequestDto());
+		model.addAttribute("listaProducto", servicioProducto.listarProducto());
 		return "/inventario/nuevolote";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
 	public String guardarLote(@ModelAttribute LoteRequestDto lote) {
 		servicioLote.guardarLote(lote);

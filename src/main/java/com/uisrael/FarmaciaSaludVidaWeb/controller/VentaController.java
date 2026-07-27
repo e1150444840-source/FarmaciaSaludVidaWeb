@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VentaRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.VentaResponseDto;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IClienteService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IUsuarioService;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IVentaService;
 
 @Controller
@@ -21,12 +23,22 @@ public class VentaController {
 
 	@Autowired
 	private IVentaService servicioVenta;
+	
+	@Autowired
+	private IClienteService servicioCliente;
+	
+	@Autowired
+	private IUsuarioService servicioUsuario;
 
 	// CONSTRUCTOR
-	public VentaController(IVentaService servicioVenta) {
+	public VentaController(IVentaService servicioVenta, IClienteService servicioCliente,
+			IUsuarioService servicioUsuario) {
 
 		this.servicioVenta = servicioVenta;
+		this.servicioCliente = servicioCliente;
+		this.servicioUsuario = servicioUsuario;
 	}
+
 	
 	@GetMapping
 	public String leerPagina(Model model) {
@@ -38,6 +50,8 @@ public class VentaController {
 	@GetMapping("/nuevoVenta")
 	public String crearVenta(Model model) {
 		model.addAttribute("venta", new VentaRequestDto());
+		model.addAttribute("listaCliente", servicioCliente.listarCliente());
+		model.addAttribute("listaUsuario", servicioUsuario.listarUsuario());
 		return "/venta/nuevoventa";
 	}
 

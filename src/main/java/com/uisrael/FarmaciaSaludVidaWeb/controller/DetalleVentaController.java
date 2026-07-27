@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.DetalleVentaRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.DetalleVentaResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IDetalleVentaService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IInventarioService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IVentaService;
 
 @Controller
 @RequestMapping("/detalleVenta") // url
@@ -21,12 +23,22 @@ public class DetalleVentaController {
 
 	@Autowired
 	private IDetalleVentaService servicioDetalleVenta;
+	
+	@Autowired
+	private IVentaService servicioVenta;
+	
+	@Autowired
+	private IInventarioService servicioInventario;
 
 	// CONSTRUCTOR
-	public DetalleVentaController(IDetalleVentaService servicioDetalleVenta) {
+	public DetalleVentaController(IDetalleVentaService servicioDetalleVenta, IVentaService servicioVenta,
+			IInventarioService servicioInventario) {
 
 		this.servicioDetalleVenta = servicioDetalleVenta;
+		this.servicioVenta = servicioVenta;
+		this.servicioInventario = servicioInventario;
 	}
+
 
 	@GetMapping
 	public String leerPagina(Model model) {
@@ -34,10 +46,12 @@ public class DetalleVentaController {
 		model.addAttribute("listaDetalleVenta", resultadoDB);
 		return "/venta/listardetalleventa"; // ruta fisica de la pagina
 	}
-	
+
 	@GetMapping("/nuevoDetalleVenta")
 	public String crearDetalleVenta(Model model) {
 		model.addAttribute("detalleVenta", new DetalleVentaRequestDto());
+		model.addAttribute("listaVenta", servicioVenta.listarVenta());
+		model.addAttribute("listaInventario", servicioInventario.listarInventario());
 		return "/venta/nuevodetalleventa";
 	}
 

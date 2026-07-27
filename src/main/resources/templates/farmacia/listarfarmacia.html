@@ -12,7 +12,13 @@
 
 	<!-- multi-column ordering -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">LISTA DE FARMACIAS</h4>
+		<!-- Cabecera con Título y Botón Nuevo Cliente -->
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h4 class="card-title mb-0 fw-bold">LISTA DE FARMACIA</h4>
+			<a th:href="@{/farmacia/nuevoFarmacia}" class="btn btn-success"> <i
+				class="fas fa-plus me-1"></i> Nueva Farmacia
+			</a>
+		</div>
 		<div class="table-responsive">
 			<table id="multi_col_order"
 				class="table border table-striped table-bordered text-nowrap"
@@ -32,15 +38,13 @@
 						<td th:text="${indice.nombreFarmacia}"></td>
 						<td th:text="${indice.ciudad}"></td>
 						<td th:text="${indice.direccion}"></td>
-						<td>
-							<a th:href="@{/farmacia/editar/{idFarmacia}(idFarmacia=${indice.idFarmacia})}" 
-							class="btn btn-primary" title="Editar">
-							<i class="far fa-edit"></i></a> 
-							<a href="" class="btn btn-danger" title="Eliminar">
-							<i class="far fa-trash-alt"></i></a>
-						</td>
+						<td><a
+							th:href="@{/farmacia/editar/{idFarmacia}(idFarmacia=${indice.idFarmacia})}"
+							class="btn btn-primary" title="Editar"> <i
+								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
+							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
 					</tr>
-				
+
 				</tbody>
 			</table>
 		</div>

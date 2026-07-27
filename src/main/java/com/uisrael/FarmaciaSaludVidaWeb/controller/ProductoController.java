@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.ProductoRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.ProductoResponseDto;
+import com.uisrael.FarmaciaSaludVidaWeb.services.ICategoriaService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.ILaboratorioService;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IProductoService;
 
 @Controller
@@ -22,10 +24,19 @@ public class ProductoController {
 	@Autowired
 	private IProductoService servicioProducto;
 
+	@Autowired
+	private ICategoriaService servicioCategoria;
+	
+	@Autowired
+	private ILaboratorioService servicioLaboratorio;
+	
 	// CONSTRUCTOR
-	public ProductoController(IProductoService servicioProducto) {
+	public ProductoController(IProductoService servicioProducto, ICategoriaService servicioCategoria,
+			ILaboratorioService servicioLaboratorio) {
 
 		this.servicioProducto = servicioProducto;
+		this.servicioCategoria = servicioCategoria;
+		this.servicioLaboratorio = servicioLaboratorio;
 	}
 
 	@GetMapping
@@ -34,10 +45,12 @@ public class ProductoController {
 		model.addAttribute("listaProducto", resultadoDB);
 		return "/producto/listarproducto"; // ruta fisica de la pagina
 	}
-	
+
 	@GetMapping("/nuevoProducto")
 	public String crearProducto(Model model) {
 		model.addAttribute("producto", new ProductoRequestDto());
+		model.addAttribute("listaCategoria", servicioCategoria.listarCategoria());
+		model.addAttribute("listaLaboratorio", servicioLaboratorio.listarLaboratorio());
 		return "/producto/nuevoproducto";
 	}
 

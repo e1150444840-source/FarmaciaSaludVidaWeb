@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.InventarioRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.InventarioResponseDto;
+import com.uisrael.FarmaciaSaludVidaWeb.services.IFarmaciaService;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IInventarioService;
+import com.uisrael.FarmaciaSaludVidaWeb.services.ILoteService;
 
 @Controller
 @RequestMapping("/inventario") // url
@@ -22,25 +24,39 @@ public class InventarioController {
 	@Autowired
 	private IInventarioService servicioInventario;
 
+	@Autowired
+	private IFarmaciaService servicioFarmacia;
+	
+	@Autowired
+	private ILoteService servicioLote;
+	
 	// CONSTRUCTOR
-	public InventarioController(IInventarioService servicioInventario) {
+	public InventarioController(IInventarioService servicioInventario, IFarmaciaService servicioFarmacia,
+			ILoteService servicioLote) {
 
 		this.servicioInventario = servicioInventario;
+		this.servicioFarmacia = servicioFarmacia;
+		this.servicioLote = servicioLote;
 	}
 
+	// LISTAR CLIENTE
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<InventarioResponseDto> resultadoDB = servicioInventario.listarInventario();
 		model.addAttribute("listaInventario", resultadoDB);
 		return "/inventario/listarinventario"; // ruta fisica de la pagina
 	}
-	
+
+	// CREAR NUEVO
 	@GetMapping("/nuevoInventario")
 	public String crearInventario(Model model) {
 		model.addAttribute("inventario", new InventarioRequestDto());
+		model.addAttribute("listaFarmacia", servicioFarmacia.listarFarmacia());
+		model.addAttribute("listaLote", servicioLote.listarLote());
 		return "/inventario/nuevoinventario";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
 	public String guardarInventario(@ModelAttribute InventarioRequestDto inventario) {
 		servicioInventario.guardarInventario(inventario);

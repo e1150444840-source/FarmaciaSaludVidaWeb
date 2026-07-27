@@ -9,29 +9,81 @@
 </head>
 
 <body>
-
-	<!-- multi-column ordering -->
+	<!-- Formulario Registro Nuevo Tipo de Cliente -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">NUEVO TIPO CLIENTES</h4>
-		<form th:action="@{/tipoCliente/guardar}" th:object="${tipoCliente}" method="post">
-			<div class="mb-3">
-				<input type="hidden" th:field="*{idTipoCliente}" value="0" />
-			</div>
-			<div class="mb-3">
-				<label for="nombre" class="form-label">NOMBRE</label> 
-				<input type="text" class="form-control" id="nombre" th:field="*{nombreTipoCliente}">
-			</div>
-			<div class="mb-3">
-				<label for="descripcion" class="form-label">DESCRIPCIÓN</label> 
-				<input	type="text" class="form-control" id="descripcion" th:field="*{descripcion}">
-			</div>
-			<div class="mb-3 form-check">
-   				<input type="checkbox" class="form-check-input" id="estado" th:field="*{estado}">
-    			<label class="form-check-label" for="estado">Activo</label>
-  			</div>
-			<button type="submit" class="btn btn-primary">GUARDAR</button>
-		</form>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<!-- Tarjeta principal -->
+				<div class="card shadow-sm border-0 rounded-3 my-3">
 
+					<!-- Cabecera de la tarjeta -->
+					<div class="card-header bg-primary text-white py-3 rounded-top">
+						<h5 class="card-title mb-0 fw-bold">
+							<i class="fas fa-user-tag me-2"></i> NUEVO TIPO CLIENTE
+						</h5>
+					</div>
+
+					<!-- Cuerpo del formulario -->
+					<div class="card-body p-4">
+						<form th:action="@{/tipoCliente/guardar}"
+							th:object="${tipoCliente}" method="post">
+							<div class="mb-3">
+								<input type="hidden" th:field="*{idTipoCliente}" value="0" />
+							</div>
+							<div class="row g-3">
+								<!-- Nombre Tipo Cliente -->
+								<div class="col-md-12">
+									<label class="form-label fw-bold text-secondary">Nombre
+										Tipo Cliente <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-tag text-muted"></i></span> <input type="text"
+											class="form-control" th:field="*{nombreTipoCliente}"
+											placeholder="Ej. Mayorista, VIP, Regular" required>
+									</div>
+								</div>
+
+								<!-- Descripción -->
+								<div class="col-md-12">
+									<label class="form-label fw-bold text-secondary">Descripción</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-align-left text-muted"></i></span>
+										<textarea class="form-control" th:field="*{descripcion}"
+											rows="3"
+											placeholder="Detalles o beneficios de este tipo de cliente..."></textarea>
+									</div>
+								</div>
+
+								<!-- Checkbox Activo (Switch elegante) -->
+								<div class="col-md-12 mt-3">
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" role="switch"
+											id="estadoActivo" th:field="*{estado}" checked> <label
+											class="form-check-label fw-bold text-secondary"
+											for="estadoActivo">Activo</label>
+									</div>
+								</div>
+							</div>
+
+							<!-- Botones de Acción -->
+							<div
+								class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+								<a th:href="@{/tipoCliente}"
+									class="btn btn-outline-secondary px-4"> <i
+									class="fas fa-times me-1"></i> Cancelar
+								</a>
+								<button type="submit" class="btn btn-primary px-4">
+									<i class="fas fa-save me-1"></i> Guardar
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

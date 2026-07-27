@@ -5,29 +5,111 @@
 
 <head>
 <meta charset="utf-8">
-<title>Nuevo Detalle Venta </title>
+<title>Nuevo Detalle Venta</title>
 </head>
 
 <body>
-
-	<!-- multi-column ordering -->
+	<!-- Formulario Registro Nuevo Detalle Venta -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">NUEVO DETALLE VENTA </h4>
-		<form th:action="@{/detalleVenta/guardar}" th:object="${detalleVenta}" method="post">
-			<div class="mb-3">
-				<input type="hidden" th:field="*{idDetalleVenta}" value="0" />
-			</div>
-			<div class="mb-3">
-				<label for="cantidad" class="form-label">CANTIDAD</label> 
-				<input type="text" class="form-control" id="cantidad" th:field="*{cantidad}">
-			</div>
-			<div class="mb-3">
-				<label for="punitario" class="form-label">PRECIO UNITARIO</label> 
-				<input	type="text" class="form-control" id="punitario" th:field="*{precioUnitario}">
-			</div>
-			<button type="submit" class="btn btn-primary">GUARDAR</button>
-		</form>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<!-- Tarjeta principal -->
+				<div class="card shadow-sm border-0 rounded-3 my-3">
 
+					<!-- Cabecera de la tarjeta -->
+					<div class="card-header bg-primary text-white py-3 rounded-top">
+						<h5 class="card-title mb-0 fw-bold">
+							<i class="fas fa-list-alt me-2"></i> NUEVO DETALLE VENTA
+						</h5>
+					</div>
+
+					<!-- Cuerpo del formulario -->
+					<div class="card-body p-4">
+						<form th:action="@{/detalleVenta/guardar}"
+							th:object="${detalleVenta}" method="post">
+							<div class="mb-3">
+								<input type="hidden" th:field="*{idDetalleVenta}" value="0" />
+							</div>
+							<div class="row g-3">
+								<!-- Cantidad -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Cantidad
+										<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-cubes text-muted"></i></span> <input type="number"
+											class="form-control" th:field="*{cantidad}"
+											placeholder="0" min="1" required>
+									</div>
+								</div>
+
+								<!-- Precio Unitario -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Precio
+										Unitario ($) <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-tag text-muted"></i></span> <input type="number"
+											step="0.01" class="form-control"
+											th:field="*{precioUnitario}" placeholder="0.0" min="0"
+											required>
+									</div>
+								</div>
+								
+								<!-- Detalle Venta -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Detalle Venta
+									<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-tasks text-muted"></i></span> <select
+											class="form-select" th:field="*{fkVenta.idVenta}" required>
+											<option value="0" disabled selected>-- Seleccione una Venta--</option>
+											<option th:each="venta: ${listaVenta}" 
+													th:value="${venta.idVenta}"
+													th:text="${venta.fechaEmison}"></option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Inventario -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Inventario
+									<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-tasks text-muted"></i></span> <select
+											class="form-select" th:field="*{fkInventario.idInventario}"	required>
+											<option value="0" disabled selected>-- Seleccione un Inventario --</option>
+											<option th:each="inventario: ${listaInventario}"
+												th:value="${inventario.idInventario}"
+												th:text="${inventario.stockActual}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Botones de Acción -->
+							<div
+								class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+								<a th:href="@{/detalleVenta}"
+									class="btn btn-outline-secondary px-4"> <i
+									class="fas fa-times me-1"></i> Cancelar
+								</a>
+								<button type="submit" class="btn btn-primary px-4">
+									<i class="fas fa-save me-1"></i> Guardar
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

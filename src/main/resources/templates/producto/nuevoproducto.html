@@ -9,25 +9,105 @@
 </head>
 
 <body>
-
-	<!-- multi-column ordering -->
+	<!-- Formulario Registro Nuevo Producto -->
 	<div layout:fragment="contenidopaguinas">
-		<h4 class="card-title">NUEVO PRODUCTO</h4>
-		<form th:action="@{/producto/guardar}" th:object="${producto}" method="post">
-			<div class="mb-3">
-				<input type="hidden" th:field="*{idProducto}" value="0" />
-			</div>
-			<div class="mb-3">
-				<label for="nombre" class="form-label">NOMBRE PRODUCTO</label> 
-				<input type="text" class="form-control" id="nombre" th:field="*{nombreProducto}">
-			</div>
-			<div class="mb-3">
-				<label for="descripcion" class="form-label">DESCRIPCIÓN</label> 
-				<input	type="text" class="form-control" id="descripcion" th:field="*{descripcion}">
-			</div>
-			<button type="submit" class="btn btn-primary">GUARDAR</button>
-		</form>
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<!-- Tarjeta principal -->
+				<div class="card shadow-sm border-0 rounded-3 my-3">
 
+					<!-- Cabecera de la tarjeta -->
+					<div class="card-header bg-primary text-white py-3 rounded-top">
+						<h5 class="card-title mb-0 fw-bold">
+							<i class="fas fa-pills me-2"></i> NUEVO PRODUCTO
+						</h5>
+					</div>
+
+					<!-- Cuerpo del formulario -->
+					<div class="card-body p-4">
+						<form th:action="@{/producto/guardar}" th:object="${producto}"
+							method="post">
+							<div class="mb-3">
+								<input type="hidden" th:field="*{idProducto}" value="0" />
+							</div>
+							<div class="row g-3">
+								<!-- Nombre Producto -->
+								<div class="col-md-12">
+									<label class="form-label fw-bold text-secondary">Nombre
+										Producto <span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-box text-muted"></i></span> <input type="text"
+											class="form-control" th:field="*{nombreProducto}"
+											placeholder="Ej. Paracetamol 500mg" required>
+									</div>
+								</div>
+
+								<!-- Descripción -->
+								<div class="col-md-12">
+									<label class="form-label fw-bold text-secondary">Descripción</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-align-left text-muted"></i></span>
+										<textarea class="form-control" th:field="*{descripcion}"
+											rows="3"
+											placeholder="Detalles, uso o indicaciones del producto..."></textarea>
+									</div>
+								</div>
+								
+								<!-- Categoria -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary">Categoría
+									<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-tasks text-muted"></i></span> <select
+											class="form-select" th:field="*{fkCategoria.idCategoria}" required>
+											<option value="0" disabled selected>-- Seleccione un Categoría --</option>
+											<option th:each="categoria: ${listaCategoria}" 
+													th:value="${categoria.idCategoria}"
+													th:text="${categoria.nombreCategoria}"></option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Laboratiorio -->
+								<div class="col-md-6">
+									<label class="form-label fw-bold text-secondary"> Laboratorio
+									<span class="text-danger">*</span>
+									</label>
+									<div class="input-group">
+										<span class="input-group-text bg-light"><i
+											class="fas fa-tasks text-muted"></i></span> <select
+											class="form-select" th:field="*{fkLaboratorio.idLaboratorio}"	required>
+											<option value="0" disabled selected>-- Seleccione un Laboratorio --</option>
+											<option th:each="laboratorio: ${listaLaboratorio}"
+												th:value="${laboratorio.idLaboratorio}"
+												th:text="${laboratorio.nombreLaboratorio}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							</div>
+
+							<!-- Botones de Acción -->
+							<div
+								class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+								<a th:href="@{/producto}" class="btn btn-outline-secondary px-4">
+									<i class="fas fa-times me-1"></i> Cancelar
+								</a>
+								<button type="submit" class="btn btn-primary px-4">
+									<i class="fas fa-save me-1"></i> Guardar
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 
