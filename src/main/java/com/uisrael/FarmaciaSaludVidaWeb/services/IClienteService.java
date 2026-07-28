@@ -13,4 +13,5 @@ public interface IClienteService {
 	
 	ClienteResponseDto buscarPorId(int idCliente);
 
+	ClienteResponseDto eliminarPorId(int idCliente);
 }

@@ -66,4 +66,12 @@ public class ClienteController {
 		// 4.- redireccione al formulario nuevo
 		return "/cliente/nuevocliente";
 	}
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idCliente}")
+	public String eliminarCliente(@PathVariable int idCliente) {
+	    servicioCliente.eliminarPorId(idCliente);
+	    return "redirect:/cliente";
+	}
+        
 }
