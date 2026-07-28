@@ -44,7 +44,7 @@ public class ClienteServiceImpl implements IClienteService {
 	//ELIMINAR
 	@Override
 	public ClienteResponseDto eliminarPorId(int idCliente) {
-		return webClient.delete()
+		return webClient.post()
 	            .uri(uriBuilder -> uriBuilder.path("/cliente/eliminarId/{idCliente}")
 	                    .build(idCliente))
 	            .retrieve()

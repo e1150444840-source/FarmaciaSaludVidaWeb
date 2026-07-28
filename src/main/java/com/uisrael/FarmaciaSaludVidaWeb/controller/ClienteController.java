@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService servicioCliente;
+	
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
+	
 	@Autowired
 	private ITipoClienteService servicioTipoCliente;
 
@@ -35,11 +40,16 @@ public class ClienteController {
 	// LISTAR CLIENTE
 	@GetMapping
 	public String leerPagina(Model model) {
-		List<ClienteResponseDto> resultadoDB = servicioCliente.listarCliente();
-		model.addAttribute("listaClientes", resultadoDB);
-		return "/cliente/listarcliente"; // ruta fisica de la pagina
-	}
+	    List<ClienteResponseDto> resultadoDB = servicioCliente.listarCliente();
+	    // Filtramos para ignorar los IDs que se marcaron como "eliminados"
+	    List<ClienteResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdCliente())) 
+	            .collect(Collectors.toList());
 
+	    model.addAttribute("listaClientes", listaFiltrada);
+	    return "/cliente/listarcliente";
+	}
+	
 	// CREAR NUEVO
 	@GetMapping("/nuevoCliente")
 	public String crearCliente(Model model) {
@@ -70,7 +80,7 @@ public class ClienteController {
 	// ELIMINAR
 	@GetMapping("/eliminar/{idCliente}")
 	public String eliminarCliente(@PathVariable int idCliente) {
-	    servicioCliente.eliminarPorId(idCliente);
+	    eliminadosEnMemoria.add(idCliente); 
 	    return "redirect:/cliente";
 	}
         
