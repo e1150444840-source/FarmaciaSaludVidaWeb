@@ -13,4 +13,6 @@ public interface ILaboratorioService {
 	void guardarLaboratorio(LaboratorioRequestDto nuevo);
 	
 	LaboratorioResponseDto buscarPorId(int idLaboratorio);
+	
+	LaboratorioResponseDto eliminarPorId(int idLaboratorio);
 }

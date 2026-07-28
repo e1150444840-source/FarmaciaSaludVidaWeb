@@ -12,4 +12,6 @@ public interface IVehiculoService {
 	void guardarVehiculo(VehiculoRequestDto nuevo);
 	
 	VehiculoResponseDto buscarPorId(int idVehiculo);
+	
+	VehiculoResponseDto eliminarPorId(int idVehiculo);
 }

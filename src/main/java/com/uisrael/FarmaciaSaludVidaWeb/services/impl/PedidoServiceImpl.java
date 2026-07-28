@@ -38,5 +38,15 @@ public class PedidoServiceImpl implements IPedidoService {
 				.build(idPedido)).retrieve().bodyToMono(PedidoResponseDto.class).block();
 	}
 
+	@Override
+	public PedidoResponseDto eliminarPorId(int idPedido) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/pedido/eliminarId/{idPedido}")
+	                    .build(idPedido))
+	            .retrieve()
+	            .bodyToMono(PedidoResponseDto.class)
+	            .block();
+	}
+
 	
 }

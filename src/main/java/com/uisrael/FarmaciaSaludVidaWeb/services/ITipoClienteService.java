@@ -12,4 +12,6 @@ public interface ITipoClienteService {
 	void guardarTipoCliente(TipoClienteRequestDto nuevo);
 
 	TipoClienteResponseDto buscarPorId(int idTipoCliente);
+	
+	TipoClienteResponseDto eliminarPorId(int idTipoCliente);
 }

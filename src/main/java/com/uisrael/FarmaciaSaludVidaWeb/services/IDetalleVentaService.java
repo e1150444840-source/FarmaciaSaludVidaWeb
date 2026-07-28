@@ -12,4 +12,6 @@ public interface IDetalleVentaService {
 	void guardarDetalleVenta(DetalleVentaRequestDto nuevo);
 	
 	DetalleVentaResponseDto buscarPorId(int idDetalleVenta);
+	
+	DetalleVentaResponseDto eliminarPorId(int idDetalleVenta);
 }

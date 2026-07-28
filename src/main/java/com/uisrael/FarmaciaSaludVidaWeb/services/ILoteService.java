@@ -13,4 +13,6 @@ public interface ILoteService {
 	void guardarLote(LoteRequestDto nuevo);
 	
 	LoteResponseDto buscarPorId(int idLote);
+	
+	LoteResponseDto eliminarPorId(int idLote);
 }

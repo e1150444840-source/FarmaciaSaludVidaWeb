@@ -12,5 +12,7 @@ public interface IFarmaciaService {
 	void guardarFarmacia(FarmaciaRequestDto nuevo);
 	
 	FarmaciaResponseDto buscarPorId(int idFarmacia);
+	
+	FarmaciaResponseDto eliminarPorId(int idFarmacia);
 
 }

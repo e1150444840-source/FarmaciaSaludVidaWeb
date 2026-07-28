@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class VehiculoController {
 
 	@Autowired
 	private IVehiculoService servicioVehiculo;
+	
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
 
 	// CONSTRUCTOR
 	public VehiculoController(IVehiculoService servicioVehiculo) {
@@ -31,7 +35,11 @@ public class VehiculoController {
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<VehiculoResponseDto> resultadoDB = servicioVehiculo.listarVehiculo();
-		model.addAttribute("listaVehiculo", resultadoDB);
+		List<VehiculoResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdVehiculo())) 
+	            .collect(Collectors.toList());
+		
+		model.addAttribute("listaVehiculo", listaFiltrada);
 		return "/vehiculo/listarvehiculo"; // ruta fisica de la pagina
 	}
 	
@@ -56,5 +64,12 @@ public class VehiculoController {
 		model.addAttribute("vehiculo", servicioVehiculo.buscarPorId(idVehiculo));
 		// 4.- redireccione al formulario nuevo
 		return "/vehiculo/nuevovehiculo";
+	}
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idVehiculo}")
+	public String eliminarVehiculo(@PathVariable int idVehiculo) {
+	    eliminadosEnMemoria.add(idVehiculo); 
+	    return "redirect:/vehiculo";
 	}
 }

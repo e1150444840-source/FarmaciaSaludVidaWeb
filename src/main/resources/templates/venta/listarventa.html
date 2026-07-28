@@ -14,8 +14,8 @@
 	<div layout:fragment="contenidopaguinas">
 		<div class="d-flex justify-content-between align-items-center mb-3">
 			<h4 class="card-title mb-0 fw-bold">LISTA DE VENTAS</h4>
-			<a th:href="@{/venta/nuevoVenta}"
-				class="btn btn-success"> <i class="fas fa-plus me-1"></i> Nueva Venta
+			<a th:href="@{/venta/nuevoVenta}" class="btn btn-success"> <i
+				class="fas fa-plus me-1"></i> Nueva Venta
 			</a>
 		</div>
 		<div class="table-responsive">
@@ -40,7 +40,7 @@
 					<tr th:each="indice : ${listaVenta}">
 						<td th:text="${indice.idVenta}"></td>
 						<td th:text="${indice.fkCliente.nombreCliente}"></td>
-						<td th:text="${indice.fkUsuario.username}"></td>	
+						<td th:text="${indice.fkUsuario.username}"></td>
 						<td th:text="${indice.canalVenta}"></td>
 						<td th:text="${indice.fechaEmison}"></td>
 						<td th:text="${indice.subtotal}"></td>
@@ -49,8 +49,12 @@
 						<td><a
 							th:href="@{/venta/editar/{idVenta}(idVenta=${indice.idVenta})}"
 							class="btn btn-primary" title="Editar"> <i
-								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
-							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
+								class="far fa-edit"></i></a> <a
+							th:href="@{/venta/eliminar/{idVenta}(idVenta=${indice.idVenta})}"
+							class="btn btn-danger" title="Eliminar"
+							onclick="return confirm('¿Seguro que deseas eliminar esta Venta');">
+								<i class="far fa-trash-alt"></i>
+						</a></td>
 					</tr>
 
 

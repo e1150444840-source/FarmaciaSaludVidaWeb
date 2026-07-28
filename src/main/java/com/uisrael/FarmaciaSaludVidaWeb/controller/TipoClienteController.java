@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class TipoClienteController {
 
 	@Autowired
 	private ITipoClienteService servicioTipoCliente;
+	
+
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
 
 	// CONSTRUCTOR
 	public TipoClienteController(ITipoClienteService servicioTipoCliente) {
@@ -31,7 +36,11 @@ public class TipoClienteController {
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<TipoClienteResponseDto> resultadoDB = servicioTipoCliente.listarTipoCliente();
-		model.addAttribute("listaTipoCliente", resultadoDB);
+		List<TipoClienteResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdTipoCliente())) 
+	            .collect(Collectors.toList());
+		
+		model.addAttribute("listaTipoCliente", listaFiltrada);
 		return "/cliente/listartipocliente"; // ruta fisica de la pagina
 	}
 
@@ -58,5 +67,11 @@ public class TipoClienteController {
 		// 4.- redireccione al formulario nuevo
 		return "/cliente/nuevotipocliente";
 	}
-
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idTipoCliente}")
+	public String eliminarTipoCliente(@PathVariable int idTipoCliente) {
+	    eliminadosEnMemoria.add(idTipoCliente); 
+	    return "redirect:/tipoCliente";
+	}
 }

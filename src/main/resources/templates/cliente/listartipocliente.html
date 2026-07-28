@@ -40,12 +40,14 @@
 						<td th:text="${indice.nombreTipoCliente}"></td>
 						<td th:text="${indice.descripcion}"></td>
 						<td th:text="${indice.estado}"></td>
-						<td><a
-							th:href="@{/tipoCliente/editar/{idTipoCliente}
-								(idTipoCliente=${indice.idTipoCliente})}"
-							class="btn btn-primary" title="Editar"> <i
-								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
-							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
+						<td>
+							<a th:href="@{/tipoCliente/editar/{idTipoCliente}(idTipoCliente=${indice.idTipoCliente})}"
+							class="btn btn-primary" title="Editar"> <i class="far fa-edit"></i></a> 
+							<a th:href="@{/tipoCliente/eliminar/{idTipoCliente}(idTipoCliente=${indice.idTipoCliente})}" 
+							class="btn btn-danger" title="Eliminar" 
+							onclick="return confirm('¿Seguro que deseas eliminar este Tipo Cliente?');">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

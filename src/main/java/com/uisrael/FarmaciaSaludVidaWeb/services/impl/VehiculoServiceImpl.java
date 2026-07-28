@@ -36,4 +36,14 @@ public class VehiculoServiceImpl implements IVehiculoService {
 		return webClient.get().uri(UriBuilder -> UriBuilder.path("/vehiculo/buscarId/{idVehiculo}")
 				.build(idVehiculo)).retrieve().bodyToMono(VehiculoResponseDto.class).block();
 	}
+
+	@Override
+	public VehiculoResponseDto eliminarPorId(int idVehiculo) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/vehiculo/eliminarId/{idVehiculo}")
+	                    .build(idVehiculo))
+	            .retrieve()
+	            .bodyToMono(VehiculoResponseDto.class)
+	            .block();
+	}
 }

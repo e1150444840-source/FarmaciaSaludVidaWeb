@@ -38,4 +38,14 @@ public class LoteServiceImpl implements ILoteService {
 				.build(idLote)).retrieve().bodyToMono(LoteResponseDto.class).block();
 	}
 
+	@Override
+	public LoteResponseDto eliminarPorId(int idLote) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/lote/eliminarId/{idLote}")
+	                    .build(idLote))
+	            .retrieve()
+	            .bodyToMono(LoteResponseDto.class)
+	            .block();
+	}
+
 }

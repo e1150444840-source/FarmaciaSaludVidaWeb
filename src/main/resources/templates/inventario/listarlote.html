@@ -40,11 +40,14 @@
 						<td th:text="${indice.fkProducto.nombreProducto}"></td>
 						<td th:text="${indice.fechaIngreso}"></td>
 						<td th:text="${indice.fechaCaducidad}"></td>
-						<td><a
-							th:href="@{/lote/editar/{idLote}(idLote=${indice.idLote})}"
-							class="btn btn-primary" title="Editar"> <i
-								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
-							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
+						<td>
+							<a th:href="@{/lote/editar/{idLote}(idLote=${indice.idLote})}"
+							class="btn btn-primary" title="Editar"> <i class="far fa-edit"></i></a> 
+							<a th:href="@{/lote/eliminar/{idLote}(idLote=${indice.idLote})}" 
+							class="btn btn-danger" title="Eliminar" 
+							onclick="return confirm('¿Seguro que deseas eliminar este Lote');">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
 
 

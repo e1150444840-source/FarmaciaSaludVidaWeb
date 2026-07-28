@@ -12,4 +12,6 @@ public interface IUsuarioService {
 	void guardarUsuario(UsuarioRequestDto nuevo);
 	
 	UsuarioResponseDto buscarPorId(int idUsuario);
+	
+	UsuarioResponseDto eliminarPorId(int idUsuario);
 }

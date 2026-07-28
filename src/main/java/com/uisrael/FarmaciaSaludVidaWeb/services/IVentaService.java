@@ -13,4 +13,6 @@ public interface IVentaService {
 	void guardarVenta(VentaRequestDto nuevo);
 	
 	VentaResponseDto buscarPorId(int idVenta);
+	
+	VentaResponseDto eliminarPorId(int idVenta);
 }

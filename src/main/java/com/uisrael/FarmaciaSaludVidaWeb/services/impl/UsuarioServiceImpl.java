@@ -38,4 +38,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
 				.build(idUsuario)).retrieve().bodyToMono(UsuarioResponseDto.class).block();
 	}
 
+	@Override
+	public UsuarioResponseDto eliminarPorId(int idUsuario) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/usuario/eliminarId/{idUsuario}")
+	                    .build(idUsuario))
+	            .retrieve()
+	            .bodyToMono(UsuarioResponseDto.class)
+	            .block();
+	}
+
 }

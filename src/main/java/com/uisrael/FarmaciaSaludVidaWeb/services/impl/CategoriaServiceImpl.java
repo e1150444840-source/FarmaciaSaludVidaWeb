@@ -38,4 +38,14 @@ public class CategoriaServiceImpl implements ICategoriaService {
 				.build(idCategoria)).retrieve().bodyToMono(CategoriaResponseDto.class).block();
 	}
 
+	@Override
+	public CategoriaResponseDto eliminarPorId(int idCategoria) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/categoria/eliminarId/{idCategoria}")
+	                    .build(idCategoria))
+	            .retrieve()
+	            .bodyToMono(CategoriaResponseDto.class)
+	            .block();
+	}
+
 }

@@ -11,4 +11,6 @@ public interface ICategoriaService {
 	void guardarCategoria(CategoriaRequestDto nuevo);
 	
 	CategoriaResponseDto buscarPorId(int idCategoria);
+	
+	CategoriaResponseDto eliminarPorId(int idCategoria);
 }

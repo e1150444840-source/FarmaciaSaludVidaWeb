@@ -38,10 +38,11 @@
 						<td th:text="${indice.fkFarmacia.nombreFarmacia}"></td>						
 						<td th:text="${indice.fkLote.numeroLote}"></td>
 						<td>
-							<a  th:href="@{/inventario/editar/{idInventario}(idInventario=${indice.idInventario})}"
-								class="btn btn-primary" title="Editar"> 
-							<i  class="far fa-edit"></i></a> 
-							<a  href="" class="btn btn-danger" title="Eliminar"> 
+							<a th:href="@{/inventario/editar/{idInventario}(idInventario=${indice.idInventario})}"
+							class="btn btn-primary" title="Editar"> <i  class="far fa-edit"></i></a> 
+							<a th:href="@{/inventario/eliminar/{idInventario}(idInventario=${indice.idInventario})}" 
+							class="btn btn-danger" title="Eliminar" 
+							onclick="return confirm('¿Seguro que deseas eliminar este Inventario');">
 							<i class="far fa-trash-alt"></i></a>
 						</td>
 					</tr>

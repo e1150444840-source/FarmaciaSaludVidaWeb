@@ -38,4 +38,14 @@ public class TipoClienteServiceImpl implements ITipoClienteService {
 				.build(idTipoCliente)).retrieve().bodyToMono(TipoClienteResponseDto.class).block();
 	}
 
+	@Override
+	public TipoClienteResponseDto eliminarPorId(int idTipoCliente) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/tipoCliente/eliminarId/{idTipoCliente}")
+	                    .build(idTipoCliente))
+	            .retrieve()
+	            .bodyToMono(TipoClienteResponseDto.class)
+	            .block();
+	}
+
 }

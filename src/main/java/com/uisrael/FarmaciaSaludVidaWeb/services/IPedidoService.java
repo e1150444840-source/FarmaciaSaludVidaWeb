@@ -12,4 +12,6 @@ public interface IPedidoService {
 	void guardarPedido(PedidoRequestDto nuevo);
 	
 	PedidoResponseDto buscarPorId(int idPedido);
+	
+	PedidoResponseDto eliminarPorId(int idPedido);
 }

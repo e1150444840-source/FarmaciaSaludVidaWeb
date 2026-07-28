@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class CategoriaController {
 
 	@Autowired
 	private ICategoriaService servicioCategoria;
+	
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
 
 	// CONSTRUCTOR
 	public CategoriaController(ICategoriaService servicioCategoria) {
@@ -30,8 +34,13 @@ public class CategoriaController {
 
 	@GetMapping
 	public String leerPagina(Model model) {
-		List<CategoriaResponseDto> resultadoDB = servicioCategoria.listarCategoria();
-		model.addAttribute("listaCategoria", resultadoDB);
+	    List<CategoriaResponseDto> resultadoDB = servicioCategoria.listarCategoria();
+	    // Filtramos para ignorar los IDs que se marcaron como "eliminados"
+	    List<CategoriaResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdCategoria())) 
+	            .collect(Collectors.toList());
+
+	    model.addAttribute("listaCategoria", listaFiltrada);
 		return "/producto/listarcategoria"; // ruta fisica de la pagina
 	}
 
@@ -57,5 +66,12 @@ public class CategoriaController {
 		model.addAttribute("categoria", servicioCategoria.buscarPorId(idCategoria));
 		// 4.- redireccione al formulario nuevo
 		return "/producto/nuevocategoria";
+	}
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idCategoria}")
+	public String eliminarCategoria(@PathVariable int idCategoria) {
+	    eliminadosEnMemoria.add(idCategoria); 
+	    return "redirect:/categoria";
 	}
 }

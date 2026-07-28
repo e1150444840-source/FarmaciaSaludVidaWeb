@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ public class InventarioController {
 	@Autowired
 	private ILoteService servicioLote;
 	
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
+	
 	// CONSTRUCTOR
 	public InventarioController(IInventarioService servicioInventario, IFarmaciaService servicioFarmacia,
 			ILoteService servicioLote) {
@@ -43,7 +47,11 @@ public class InventarioController {
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<InventarioResponseDto> resultadoDB = servicioInventario.listarInventario();
-		model.addAttribute("listaInventario", resultadoDB);
+		List<InventarioResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdInventario())) 
+	            .collect(Collectors.toList());
+		
+		model.addAttribute("listaInventario", listaFiltrada);
 		return "/inventario/listarinventario"; // ruta fisica de la pagina
 	}
 
@@ -74,4 +82,10 @@ public class InventarioController {
 		return "/inventario/nuevoInventario";
 	}
 
+	// ELIMINAR
+	@GetMapping("/eliminar/{idInventario}")
+	public String eliminarInventario(@PathVariable int idInventario) {
+	    eliminadosEnMemoria.add(idInventario); 
+	    return "redirect:/inventario";
+	}
 }

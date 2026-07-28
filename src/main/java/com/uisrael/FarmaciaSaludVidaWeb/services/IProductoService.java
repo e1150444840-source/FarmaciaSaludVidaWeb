@@ -13,4 +13,6 @@ public interface IProductoService {
 	void guardarProducto(ProductoRequestDto nuevo);
 	
 	ProductoResponseDto buscarPorId(int idProducto);
+	
+	ProductoResponseDto eliminarPorId(int idProducto);
 }

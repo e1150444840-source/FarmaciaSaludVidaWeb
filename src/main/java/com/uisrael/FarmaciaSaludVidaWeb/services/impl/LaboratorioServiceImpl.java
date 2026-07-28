@@ -38,4 +38,14 @@ public class LaboratorioServiceImpl implements ILaboratorioService {
 				.build(idLaboratorio)).retrieve().bodyToMono(LaboratorioResponseDto.class).block();
 	}
 
+	@Override
+	public LaboratorioResponseDto eliminarPorId(int idLaboratorio) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/laboratorio/eliminarId/{idLaboratorio}")
+	                    .build(idLaboratorio))
+	            .retrieve()
+	            .bodyToMono(LaboratorioResponseDto.class)
+	            .block();
+	}
+
 }

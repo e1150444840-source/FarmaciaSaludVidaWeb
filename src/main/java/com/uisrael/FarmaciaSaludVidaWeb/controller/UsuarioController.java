@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioService servicioUsuario;
 
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
+
 	// CONSTRUCTOR
 	public UsuarioController(IUsuarioService servicioUsuario) {
 
@@ -31,7 +35,11 @@ public class UsuarioController {
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<UsuarioResponseDto> resultadoDB = servicioUsuario.listarUsuario();
-		model.addAttribute("listaUsuario", resultadoDB);
+		List<UsuarioResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdUsuario())) 
+	            .collect(Collectors.toList());
+		
+		model.addAttribute("listaUsuario", listaFiltrada);
 		return "/usuario/listarusuario"; // ruta fisica de la pagina
 	}
 	
@@ -56,5 +64,12 @@ public class UsuarioController {
 		model.addAttribute("usuario", servicioUsuario.buscarPorId(idUsuario));
 		// 4.- redireccione al formulario nuevo
 		return "/usuario/nuevousuario";
+	}
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idUsuario}")
+	public String eliminarUsuario(@PathVariable int idUsuario) {
+	    eliminadosEnMemoria.add(idUsuario); 
+	    return "redirect:/usuario";
 	}
 }

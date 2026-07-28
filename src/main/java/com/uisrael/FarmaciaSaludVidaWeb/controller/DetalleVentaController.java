@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ public class DetalleVentaController {
 	@Autowired
 	private IInventarioService servicioInventario;
 
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
+	
 	// CONSTRUCTOR
 	public DetalleVentaController(IDetalleVentaService servicioDetalleVenta, IVentaService servicioVenta,
 			IInventarioService servicioInventario) {
@@ -43,7 +47,12 @@ public class DetalleVentaController {
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<DetalleVentaResponseDto> resultadoDB = servicioDetalleVenta.listarDetalleVenta();
-		model.addAttribute("listaDetalleVenta", resultadoDB);
+		// Filtramos para ignorar los IDs que se marcaron como "eliminados"
+	    List<DetalleVentaResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdDetalleVenta())) 
+	            .collect(Collectors.toList());
+	    
+		model.addAttribute("listaDetalleVenta", listaFiltrada);
 		return "/venta/listardetalleventa"; // ruta fisica de la pagina
 	}
 
@@ -71,6 +80,13 @@ public class DetalleVentaController {
 		model.addAttribute("detalleVenta", servicioDetalleVenta.buscarPorId(idDetalleVenta));
 		// 4.- redireccione al formulario nuevo
 		return "/venta/nuevodetalleventa";
+	}
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idDetalleVenta}")
+	public String eliminarDetalleVenta(@PathVariable int idDetalleVenta) {
+	    eliminadosEnMemoria.add(idDetalleVenta); 
+	    return "redirect:/detalleVenta";
 	}
 
 }

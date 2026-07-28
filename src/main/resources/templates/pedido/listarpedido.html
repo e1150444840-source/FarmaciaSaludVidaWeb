@@ -42,11 +42,14 @@
 						<td th:text="${indice.fkVehiculo.placa}"></td>
 						<td th:text="${indice.fechaPedido}"></td>
 						<td th:text="${indice.estadoPedido}"></td>
-						<td><a
-							th:href="@{/pedido/editar/{idPedido}(idPedido=${indice.idPedido})}"
-							class="btn btn-primary" title="Editar"> <i
-								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
-							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
+						<td>
+							<a th:href="@{/pedido/editar/{idPedido}(idPedido=${indice.idPedido})}"
+							class="btn btn-primary" title="Editar"> <i class="far fa-edit"></i></a> 
+							<a th:href="@{/pedido/eliminar/{idPedido}(idPedido=${indice.idPedido})}" 
+							class="btn btn-danger" title="Eliminar" 
+							onclick="return confirm('¿Seguro que deseas eliminar este Pedido');">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
 
 

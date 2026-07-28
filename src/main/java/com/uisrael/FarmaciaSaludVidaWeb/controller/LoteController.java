@@ -1,6 +1,8 @@
 package com.uisrael.FarmaciaSaludVidaWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,9 @@ public class LoteController {
 	
 	@Autowired
 	private IProductoService servicioProducto;
+	
+
+	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
 
 	// CONSTRUCTOR
 	public LoteController(ILoteService servicioLote, IProductoService servicioProducto) {
@@ -38,7 +43,11 @@ public class LoteController {
 	@GetMapping
 	public String leerPagina(Model model) {
 		List<LoteResponseDto> resultadoDB = servicioLote.listarLote();
-		model.addAttribute("listaLote", resultadoDB);
+		List<LoteResponseDto> listaFiltrada = resultadoDB.stream()
+	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdLote())) 
+	            .collect(Collectors.toList());
+		
+		model.addAttribute("listaLote", listaFiltrada);
 		return "/inventario/listarlote"; // ruta fisica de la pagina
 	}
 
@@ -67,5 +76,11 @@ public class LoteController {
 		// 4.- redireccione al formulario nuevo
 		return "/inventario/nuevolote";
 	}
-
+	
+	// ELIMINAR
+	@GetMapping("/eliminar/{idLote}")
+	public String eliminarLote(@PathVariable int idLote) {
+	    eliminadosEnMemoria.add(idLote); 
+	    return "redirect:/lote";
+	}
 }

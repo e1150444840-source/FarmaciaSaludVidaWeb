@@ -36,13 +36,15 @@
 						<td th:text="${indice.idLaboratorio}"></td>
 						<td th:text="${indice.nombreLaboratorio}"></td>
 						<td th:text="${indice.telefonoLaboratorio}"></td>
-						<td><a
-							th:href="@{/laboratorio/editar/{idLaboratorio}(idLaboratorio=${indice.idLaboratorio})}"
-							class="btn btn-primary" title="Editar"> <i
-								class="far fa-edit"></i></a> <a href="" class="btn btn-danger"
-							title="Eliminar"> <i class="far fa-trash-alt"></i></a></td>
+						<td>
+							<a th:href="@{/laboratorio/editar/{idLaboratorio}(idLaboratorio=${indice.idLaboratorio})}"
+							class="btn btn-primary" title="Editar"> <i class="far fa-edit"></i></a> 
+							<a th:href="@{/laboratorio/eliminar/{idLaboratorio}(idLaboratorio=${indice.idLaboratorio})}" 
+							class="btn btn-danger" title="Eliminar" 
+							onclick="return confirm('¿Seguro que deseas eliminar este Laboratorio');">
+							<i class="far fa-trash-alt"></i></a>
+						</td>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>

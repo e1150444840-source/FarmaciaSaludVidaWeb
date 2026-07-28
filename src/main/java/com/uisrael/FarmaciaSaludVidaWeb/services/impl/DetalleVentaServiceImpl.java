@@ -38,4 +38,14 @@ public class DetalleVentaServiceImpl implements IDetalleVentaService {
 				.build(idDetalleVenta)).retrieve().bodyToMono(DetalleVentaResponseDto.class).block();
 	}
 
+	@Override
+	public DetalleVentaResponseDto eliminarPorId(int idDetalleVenta) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/detalleVenta/eliminarId/{idDetalleVenta}")
+	                    .build(idDetalleVenta))
+	            .retrieve()
+	            .bodyToMono(DetalleVentaResponseDto.class)
+	            .block();
+	}
+
 }

@@ -37,4 +37,14 @@ public class InventarioServiceImpl implements IInventarioService {
 		return webClient.get().uri(UriBuilder -> UriBuilder.path("/inventario/buscarId/{idInventario}")
 				.build(idInventario)).retrieve().bodyToMono(InventarioResponseDto.class).block();
 	}
+
+	@Override
+	public InventarioResponseDto eliminarPorId(int idInventario) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/inventario/eliminarId/{idInventario}")
+	                    .build(idInventario))
+	            .retrieve()
+	            .bodyToMono(InventarioResponseDto.class)
+	            .block();
+	}
 }

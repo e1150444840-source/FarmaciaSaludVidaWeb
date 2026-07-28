@@ -37,4 +37,14 @@ public class VentaServiceImpl implements IVentaService {
 				.build(idVenta)).retrieve().bodyToMono(VentaResponseDto.class).block();
 	}
 
+	@Override
+	public VentaResponseDto eliminarPorId(int idVenta) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/venta/eliminarId/{idVenta}")
+	                    .build(idVenta))
+	            .retrieve()
+	            .bodyToMono(VentaResponseDto.class)
+	            .block();
+	}
+
 }

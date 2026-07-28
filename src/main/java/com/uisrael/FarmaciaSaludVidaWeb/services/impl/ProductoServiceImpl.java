@@ -37,6 +37,16 @@ public class ProductoServiceImpl implements IProductoService {
 				.build(idProducto)).retrieve().bodyToMono(ProductoResponseDto.class).block();
 	}
 
+	@Override
+	public ProductoResponseDto eliminarPorId(int idProducto) {
+		return webClient.post()
+	            .uri(uriBuilder -> uriBuilder.path("/producto/eliminarId/{idProducto}")
+	                    .build(idProducto))
+	            .retrieve()
+	            .bodyToMono(ProductoResponseDto.class)
+	            .block();
+	}
+
 
 
 }
