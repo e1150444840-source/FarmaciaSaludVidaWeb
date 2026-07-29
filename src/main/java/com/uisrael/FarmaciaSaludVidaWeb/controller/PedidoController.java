@@ -78,6 +78,8 @@ public class PedidoController {
 		// 2.- buscar registro por id
 		// 3.- envio al html el objeto en la BD
 		model.addAttribute("pedido", servicioPedido.buscarPorId(idPedido));
+		model.addAttribute("listaVehiculo", servicioVehiculo.listarVehiculo());
+		model.addAttribute("listaVenta", servicioVenta.listarVenta());
 		// 4.- redireccione al formulario nuevo
 		return "/pedido/nuevopedido";
 	}

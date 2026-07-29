@@ -67,7 +67,10 @@
 										<span class="input-group-text bg-light"><i
 											class="fas fa-id-card text-muted"></i></span> <input type="text"
 											class="form-control" th:field="*{ciCliente}"
-											placeholder="Ej. 1700000000" maxlength="10" required>
+											placeholder="Ej. 1700000000" maxlength="10"
+											pattern="[0-9]{10}"
+											oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+											required>
 									</div>
 								</div>
 
@@ -76,9 +79,12 @@
 									<label class="form-label fw-bold text-secondary">Teléfono</label>
 									<div class="input-group">
 										<span class="input-group-text bg-light"><i
-											class="fas fa-phone text-muted"></i></span> <input type="tel"
+											class="fas fa-phone text-muted"></i></span> <input type="text"
 											class="form-control" th:field="*{telefonoCliente}"
-											maxlength="10" placeholder="Ej. 0991234567">
+											maxlength="10" placeholder="Ej. 0991234567"
+											pattern="[0-9]{10}"
+											oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+											required>
 									</div>
 								</div>
 
@@ -109,17 +115,17 @@
 
 								<!-- Tipo de Cliente -->
 								<div class="col-md-6">
-									<label class="form-label fw-bold text-secondary">Tipo
+									<label class="form-label fw-bold text-secondary"> Tipo
 										de Cliente <span class="text-danger">*</span>
 									</label>
 									<div class="input-group">
-										<span class="input-group-text bg-light"><i
-											class="fas fa-user-tag text-muted"></i></span> <select
-											class="form-select" th:field="*{fkTipoCliente.idTipoCliente}"
+										<span class="input-group-text bg-light"> <i
+											class="fas fa-user-tag text-muted"></i>
+										</span> <select class="form-select" th:field="*{fkTipoCliente.idTipoCliente}"
 											required>
-											<option value="0" disabled selected>-- Seleccione un
-												Tipo de Cliente --</option>
-											<option th:each="tipoCliente: ${listaTipoCliente}"
+											<option value="" disabled>-- Seleccione un Tipo de
+												Cliente --</option>
+											<option th:each="tipoCliente : ${listaTipoCliente}"
 												th:value="${tipoCliente.idTipoCliente}"
 												th:text="${tipoCliente.nombreTipoCliente}"></option>
 										</select>

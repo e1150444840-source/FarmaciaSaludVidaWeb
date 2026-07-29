@@ -73,6 +73,7 @@ public class LoteController {
 		// 2.- buscar registro por id
 		// 3.- envio al html el objeto en la BD
 		model.addAttribute("lote", servicioLote.buscarPorId(idLote));
+		model.addAttribute("listaProducto", servicioProducto.listarProducto());
 		// 4.- redireccione al formulario nuevo
 		return "/inventario/nuevolote";
 	}

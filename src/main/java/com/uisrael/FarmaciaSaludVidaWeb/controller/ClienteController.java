@@ -67,14 +67,16 @@ public class ClienteController {
 	}
 	
 	// EDITAR
-	// 1.- recuperar el registro utilizando el id
-	@GetMapping("editar/{idCliente}")
+	@GetMapping("/editar/{idCliente}")
 	public String editarCliente(@PathVariable int idCliente, Model model) {
-		// 2.- buscar registro por id
-		// 3.- envio al html el objeto en la BD
-		model.addAttribute("cliente", servicioCliente.buscarPorId(idCliente));
-		// 4.- redireccione al formulario nuevo
-		return "/cliente/nuevocliente";
+	    // 1 y 2. Buscar registro por ID y enviarlo al modelo
+	    model.addAttribute("cliente", servicioCliente.buscarPorId(idCliente));
+	    
+	    // 3. Enviar la lista con el mismo nombre que en 'nuevoCliente' ("listaTipoCliente")
+	    model.addAttribute("listaTipoCliente", servicioTipoCliente.listarTipoCliente());
+	    
+	    // 4. Redireccionar al formulario
+	    return "/cliente/nuevocliente";
 	}
 	
 	// ELIMINAR

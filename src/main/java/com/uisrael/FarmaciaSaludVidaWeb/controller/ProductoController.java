@@ -75,6 +75,8 @@ public class ProductoController {
 		// 2.- buscar registro por id
 		// 3.- envio al html el objeto en la BD
 		model.addAttribute("producto", servicioProducto.buscarPorId(idProducto));
+		model.addAttribute("listaCategoria", servicioCategoria.listarCategoria());
+		model.addAttribute("listaLaboratorio", servicioLaboratorio.listarLaboratorio());
 		// 4.- redireccione al formulario nuevo
 		return "/producto/nuevoproducto";
 	}

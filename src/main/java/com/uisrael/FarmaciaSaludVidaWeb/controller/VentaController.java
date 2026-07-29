@@ -76,6 +76,8 @@ public class VentaController {
 		// 2.- buscar registro por id
 		// 3.- envio al html el objeto en la BD
 		model.addAttribute("venta", servicioVenta.buscarPorId(idVenta));
+		model.addAttribute("listaCliente", servicioCliente.listarCliente());
+		model.addAttribute("listaUsuario", servicioUsuario.listarUsuario());
 		// 4.- redireccione al formulario nuevo
 		return "/venta/nuevoventa";
 	}

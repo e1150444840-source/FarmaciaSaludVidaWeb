@@ -78,6 +78,9 @@ public class InventarioController {
 		// 2.- buscar registro por id
 		// 3.- envio al html el objeto en la BD
 		model.addAttribute("inventario", servicioInventario.buscarPorId(idInventario));
+		model.addAttribute("listaFarmacia", servicioFarmacia.listarFarmacia());
+		model.addAttribute("listaLote", servicioLote.listarLote());
+		
 		// 4.- redireccione al formulario nuevo
 		return "/inventario/nuevoInventario";
 	}

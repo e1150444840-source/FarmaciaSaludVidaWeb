@@ -40,7 +40,8 @@
 										<span class="input-group-text bg-light"><i
 											class="fas fa-cubes text-muted"></i></span> <input type="number"
 											class="form-control" th:field="*{stockActual}"
-											placeholder="0" min="0" required>
+											placeholder="0" min="0"  pattern="[0-9]{10}" 
+											oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
 									</div>
 								</div>
 							</div>
