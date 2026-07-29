@@ -123,7 +123,7 @@
 											class="fas fa-user-tag text-muted"></i>
 										</span> <select class="form-select" th:field="*{fkTipoCliente.idTipoCliente}"
 											required>
-											<option value="" disabled>-- Seleccione un Tipo de
+											<option value="0" disabled>-- Seleccione un Tipo de
 												Cliente --</option>
 											<option th:each="tipoCliente : ${listaTipoCliente}"
 												th:value="${tipoCliente.idTipoCliente}"
