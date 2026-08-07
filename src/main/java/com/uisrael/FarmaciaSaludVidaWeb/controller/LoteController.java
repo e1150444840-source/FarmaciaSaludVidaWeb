@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,21 +61,32 @@ public class LoteController {
 	}
 
 	// GUARDAR
-	@PostMapping("/guardar")
-	public String guardarLote(@ModelAttribute LoteRequestDto lote) {
-		servicioLote.guardarLote(lote);
-		return "redirect:/lote";
-	}
+		@PostMapping("/guardar")
+		public String guardarLote(@ModelAttribute("lote") LoteRequestDto lote, BindingResult result,
+				Model model) {
+
+			if (lote.getIdLote() == 0) {
+
+				if (servicioLote.existePorNumeroLote(lote.getNumeroLote())) {
+					result.rejectValue("codigoLote", "error.lote", "Este código de lote ya se encuentra registrado.");
+				}
+			}
+
+			if (result.hasErrors()) {
+				model.addAttribute("listaProducto", servicioProducto.listarProducto());
+				return "inventario/nuevolote"; // Correcto: sin / al inicio
+			}
+
+			servicioLote.guardarLote(lote);
+			return "redirect:/lote";
+		}
 	
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idLote}")
 	public String editarLote(@PathVariable int idLote, Model model) {
-		// 2.- buscar registro por id
-		// 3.- envio al html el objeto en la BD
 		model.addAttribute("lote", servicioLote.buscarPorId(idLote));
 		model.addAttribute("listaProducto", servicioProducto.listarProducto());
-		// 4.- redireccione al formulario nuevo
 		return "/inventario/nuevolote";
 	}
 	

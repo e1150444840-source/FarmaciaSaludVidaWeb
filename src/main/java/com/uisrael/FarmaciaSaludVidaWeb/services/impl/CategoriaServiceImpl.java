@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.CategoriaRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.CategoriaResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ICategoriaService;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class CategoriaServiceImpl implements ICategoriaService {
@@ -21,31 +24,37 @@ public class CategoriaServiceImpl implements ICategoriaService {
 
 	@Override
 	public List<CategoriaResponseDto> listarCategoria() {
-		return webClient.get().uri("/categoria").retrieve()
-				.bodyToFlux(CategoriaResponseDto.class).collectList().block();
+		return webClient.get().uri("/categoria").retrieve().bodyToFlux(CategoriaResponseDto.class).collectList()
+				.block();
 	}
 
 	@Override
 	public void guardarCategoria(CategoriaRequestDto nuevo) {
-		webClient.post().uri("/categoria")
-		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
-				
+		webClient.post().uri("/categoria").bodyValue(nuevo).retrieve().toBodilessEntity().block();
+
 	}
 
 	@Override
 	public CategoriaResponseDto buscarPorId(int idCategoria) {
-		return webClient.get().uri(UriBuilder -> UriBuilder.path("/categoria/buscarId/{idCategoria}")
-				.build(idCategoria)).retrieve().bodyToMono(CategoriaResponseDto.class).block();
+		return webClient.get()
+				.uri(UriBuilder -> UriBuilder.path("/categoria/buscarId/{idCategoria}").build(idCategoria)).retrieve()
+				.bodyToMono(CategoriaResponseDto.class).block();
 	}
 
 	@Override
 	public CategoriaResponseDto eliminarPorId(int idCategoria) {
 		return webClient.post()
-	            .uri(uriBuilder -> uriBuilder.path("/categoria/eliminarId/{idCategoria}")
-	                    .build(idCategoria))
-	            .retrieve()
-	            .bodyToMono(CategoriaResponseDto.class)
-	            .block();
+				.uri(uriBuilder -> uriBuilder.path("/categoria/eliminarId/{idCategoria}").build(idCategoria)).retrieve()
+				.bodyToMono(CategoriaResponseDto.class).block();
+	}
+
+	@Override
+	public boolean existePorNombreCategoria(String nombreCategoria) {
+		return Boolean.TRUE.equals(webClient.get()
+				.uri(uriBuilder -> uriBuilder.path("/categoria/existePorNombreCategoria/{nombreCategoria}")
+						.build(nombreCategoria))
+				.retrieve().bodyToMono(Boolean.class)
+				.onErrorResume(WebClientResponseException.class, ex -> Mono.just(false)).onErrorReturn(false).block());
 	}
 
 }

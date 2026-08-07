@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,6 @@ public class TipoClienteController {
 
 	@Autowired
 	private ITipoClienteService servicioTipoCliente;
-	
 
 	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
 
@@ -37,9 +37,8 @@ public class TipoClienteController {
 	public String leerPagina(Model model) {
 		List<TipoClienteResponseDto> resultadoDB = servicioTipoCliente.listarTipoCliente();
 		List<TipoClienteResponseDto> listaFiltrada = resultadoDB.stream()
-	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdTipoCliente())) 
-	            .collect(Collectors.toList());
-		
+				.filter(c -> !eliminadosEnMemoria.contains(c.getIdTipoCliente())).collect(Collectors.toList());
+
 		model.addAttribute("listaTipoCliente", listaFiltrada);
 		return "/cliente/listartipocliente"; // ruta fisica de la pagina
 	}
@@ -50,13 +49,27 @@ public class TipoClienteController {
 		return "/cliente/nuevotipocliente";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
-	public String guardarTipoCliente(@ModelAttribute TipoClienteRequestDto tipoCliente) {
-		
+	public String guardarTipoCliente(@ModelAttribute("tipoCliente") TipoClienteRequestDto tipoCliente,
+			BindingResult result, Model model) {
+
+		if (tipoCliente.getIdTipoCliente() == 0) {
+
+			if (servicioTipoCliente.existePorNombreTipoCliente(tipoCliente.getNombreTipoCliente())) {
+				result.rejectValue("nombreTipoCliente", "error.tipoCliente",
+						"Este tipo de cliente ya se encuentra registrado.");
+			}
+		}
+
+		if (result.hasErrors()) {
+			return "cliente/nuevotipocliente";
+		}
+
 		servicioTipoCliente.guardarTipoCliente(tipoCliente);
 		return "redirect:/tipoCliente";
 	}
-	
+
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idTipoCliente}")
@@ -67,11 +80,11 @@ public class TipoClienteController {
 		// 4.- redireccione al formulario nuevo
 		return "/cliente/nuevotipocliente";
 	}
-	
+
 	// ELIMINAR
 	@GetMapping("/eliminar/{idTipoCliente}")
 	public String eliminarTipoCliente(@PathVariable int idTipoCliente) {
-	    eliminadosEnMemoria.add(idTipoCliente); 
-	    return "redirect:/tipoCliente";
+		eliminadosEnMemoria.add(idTipoCliente);
+		return "redirect:/tipoCliente";
 	}
 }

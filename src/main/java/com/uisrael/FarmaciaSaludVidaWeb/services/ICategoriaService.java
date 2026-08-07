@@ -13,4 +13,7 @@ public interface ICategoriaService {
 	CategoriaResponseDto buscarPorId(int idCategoria);
 	
 	CategoriaResponseDto eliminarPorId(int idCategoria);
+	
+	boolean existePorNombreCategoria(String nombreCategoria);
+
 }

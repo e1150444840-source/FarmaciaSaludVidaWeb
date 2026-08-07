@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,21 +37,40 @@ public class LaboratorioController {
 	public String leerPagina(Model model) {
 		List<LaboratorioResponseDto> resultadoDB = servicioLaboratorio.listarLaboratorio();
 		List<LaboratorioResponseDto> listaFiltrada = resultadoDB.stream()
-	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdLaboratorio())) 
-	            .collect(Collectors.toList());
-		
+				.filter(c -> !eliminadosEnMemoria.contains(c.getIdLaboratorio())).collect(Collectors.toList());
+
 		model.addAttribute("listaLaboratorio", listaFiltrada);
 		return "/farmacia/listarlaboratorio"; // ruta fisica de la pagina
 	}
-	
+
 	@GetMapping("/nuevoLaboratorio")
 	public String crearLaboratorio(Model model) {
 		model.addAttribute("laboratorio", new LaboratorioRequestDto());
 		return "/farmacia/nuevolaboratorio";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
-	public String guardarLaboratorio(@ModelAttribute LaboratorioRequestDto laboratorio) {
+	public String guardarLaboratorio(@ModelAttribute("laboratorio") LaboratorioRequestDto laboratorio,
+			BindingResult result, Model model) {
+
+		if (laboratorio.getIdLaboratorio() == 0) {
+
+			if (servicioLaboratorio.existePorNombreLaboratorio(laboratorio.getNombreLaboratorio())) {
+				result.rejectValue("nombreLaboratorio", "error.laboratorio",
+						"Este laboratorio ya se encuentra registrado.");
+			}
+			
+			if (servicioLaboratorio.existePorTelefonoLaboratorio(laboratorio.getTelefonoLaboratorio())) {
+				result.rejectValue("telefonoLaboratorio", "error.laboratorio",
+						"Este telefono ya se encuentra registrado.");
+			}
+		}
+
+		if (result.hasErrors()) {
+			return "laboratorio/nuevolaboratorio"; 
+		}
+
 		servicioLaboratorio.guardarLaboratorio(laboratorio);
 		return "redirect:/laboratorio";
 	}
@@ -65,11 +85,11 @@ public class LaboratorioController {
 		// 4.- redireccione al formulario nuevo
 		return "/farmacia/nuevolaboratorio";
 	}
-	
+
 	// ELIMINAR
 	@GetMapping("/eliminar/{idLaboratorio}")
 	public String eliminarLaboratorio(@PathVariable int idLaboratorio) {
-	    eliminadosEnMemoria.add(idLaboratorio); 
-	    return "redirect:/laboratorio";
+		eliminadosEnMemoria.add(idLaboratorio);
+		return "redirect:/laboratorio";
 	}
 }

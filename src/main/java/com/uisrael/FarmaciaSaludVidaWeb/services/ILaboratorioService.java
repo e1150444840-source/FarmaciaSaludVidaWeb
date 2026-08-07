@@ -15,4 +15,8 @@ public interface ILaboratorioService {
 	LaboratorioResponseDto buscarPorId(int idLaboratorio);
 	
 	LaboratorioResponseDto eliminarPorId(int idLaboratorio);
+	
+	boolean existePorNombreLaboratorio(String nombreLaboratorio);
+
+	boolean existePorTelefonoLaboratorio(String telefonoLaboratorio);
 }

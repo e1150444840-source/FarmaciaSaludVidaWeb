@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,12 +29,12 @@ public class ProductoController {
 
 	@Autowired
 	private ICategoriaService servicioCategoria;
-	
+
 	@Autowired
 	private ILaboratorioService servicioLaboratorio;
-	
+
 	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
-	
+
 	// CONSTRUCTOR
 	public ProductoController(IProductoService servicioProducto, ICategoriaService servicioCategoria,
 			ILaboratorioService servicioLaboratorio) {
@@ -47,9 +48,8 @@ public class ProductoController {
 	public String leerPagina(Model model) {
 		List<ProductoResponseDto> resultadoDB = servicioProducto.listarProducto();
 		List<ProductoResponseDto> listaFiltrada = resultadoDB.stream()
-	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdProducto())) 
-	            .collect(Collectors.toList());
-		
+				.filter(c -> !eliminadosEnMemoria.contains(c.getIdProducto())).collect(Collectors.toList());
+
 		model.addAttribute("listaProducto", listaFiltrada);
 		return "/producto/listarproducto"; // ruta fisica de la pagina
 	}
@@ -62,12 +62,30 @@ public class ProductoController {
 		return "/producto/nuevoproducto";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
-	public String guardarPedido(@ModelAttribute ProductoRequestDto producto) {
+	public String guardarProducto(@ModelAttribute("producto") ProductoRequestDto producto, BindingResult result,
+			Model model) {
+
+		// 1. Validaciones para NUEVO PRODUCTO (cuando idProducto es null o 0)
+		if (producto.getIdProducto() == 0) {
+
+			if (servicioProducto.existePorNombreProducto(producto.getNombreProducto())) {
+				result.rejectValue("nombreProducto", "error.producto", "Este producto ya se encuentra registrado.");
+			}
+		}
+
+		// 2. Si hay errores de validación, recarga la vista
+		if (result.hasErrors()) {			
+			model.addAttribute("listaCategoria", servicioCategoria.listarCategoria());
+			model.addAttribute("listaLaboratorio", servicioLaboratorio.listarLaboratorio());
+			return "producto/nuevoproducto";
+		}
+
 		servicioProducto.guardarProducto(producto);
 		return "redirect:/producto";
 	}
-	
+
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idProducto}")
@@ -80,11 +98,11 @@ public class ProductoController {
 		// 4.- redireccione al formulario nuevo
 		return "/producto/nuevoproducto";
 	}
-	
+
 	// ELIMINAR
 	@GetMapping("/eliminar/{idProducto}")
 	public String eliminarProducto(@PathVariable int idProducto) {
-	    eliminadosEnMemoria.add(idProducto); 
-	    return "redirect:/producto";
+		eliminadosEnMemoria.add(idProducto);
+		return "redirect:/producto";
 	}
 }

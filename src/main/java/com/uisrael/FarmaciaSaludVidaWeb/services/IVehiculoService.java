@@ -14,4 +14,6 @@ public interface IVehiculoService {
 	VehiculoResponseDto buscarPorId(int idVehiculo);
 	
 	VehiculoResponseDto eliminarPorId(int idVehiculo);
+	
+	boolean existePorPlaca(String placa);
 }

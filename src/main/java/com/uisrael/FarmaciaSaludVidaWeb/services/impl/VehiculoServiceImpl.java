@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.VehiculoRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.VehiculoResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IVehiculoService;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class VehiculoServiceImpl implements IVehiculoService {
@@ -45,5 +48,16 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	            .retrieve()
 	            .bodyToMono(VehiculoResponseDto.class)
 	            .block();
+	}
+
+	@Override
+	public boolean existePorPlaca(String placa) {
+		return Boolean.TRUE.equals(webClient.get()
+				.uri(uriBuilder -> uriBuilder.path("/vehiculo/existePorPlaca/{placa}").build(placa))
+				.retrieve()
+				.bodyToMono(Boolean.class)
+				.onErrorResume(WebClientResponseException.class, ex -> Mono.just(false))
+				.onErrorReturn(false)
+				.block());
 	}
 }

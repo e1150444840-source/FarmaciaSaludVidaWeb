@@ -39,25 +39,25 @@
 				<tbody>
 					<tr th:each="indice : ${listaVenta}">
 						<td th:text="${indice.idVenta}"></td>
-						<td th:text="${indice.fkCliente.nombreCliente}"></td>
+						<td th:text="${indice.fkCliente.nombreCliente + ' ' + indice.fkCliente.apellidoCliente}"></td>
 						<td th:text="${indice.fkUsuario.username}"></td>
 						<td th:text="${indice.canalVenta}"></td>
 						<td th:text="${indice.fechaEmison}"></td>
-						<td th:text="${indice.subtotal}"></td>
-						<td th:text="${indice.iva}"></td>
-						<td th:text="${indice.total}"></td>
-						<td><a
-							th:href="@{/venta/editar/{idVenta}(idVenta=${indice.idVenta})}"
-							class="btn btn-primary" title="Editar"> <i
-								class="far fa-edit"></i></a> <a
-							th:href="@{/venta/eliminar/{idVenta}(idVenta=${indice.idVenta})}"
-							class="btn btn-danger" title="Eliminar"
-							onclick="return confirm('¿Seguro que deseas eliminar esta Venta');">
+						<td th:text="${#numbers.formatDecimal(indice.subtotal, 1, 'POINT', 2, 'COMMA')}"></td>
+						<td th:text="${#numbers.formatDecimal(indice.iva, 1, 'POINT', 2, 'COMMA')}"></td>
+						<td th:text="${#numbers.formatDecimal(indice.total, 1, 'POINT', 2, 'COMMA')}"></td>
+						<td>
+							<a th:href="@{/venta/editar/{idVenta}(idVenta=${indice.idVenta})}"
+								class="btn btn-primary btn-sm" title="Editar"> 
+								<i class="far fa-edit"></i>
+							</a> 
+							<a th:href="@{/venta/eliminar/{idVenta}(idVenta=${indice.idVenta})}"
+								class="btn btn-danger btn-sm" title="Eliminar"
+								onclick="return confirm('¿Seguro que deseas eliminar esta Venta?');">
 								<i class="far fa-trash-alt"></i>
-						</a></td>
+							</a>
+						</td>
 					</tr>
-
-
 				</tbody>
 			</table>
 		</div>

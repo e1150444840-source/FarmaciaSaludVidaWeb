@@ -15,4 +15,6 @@ public interface IProductoService {
 	ProductoResponseDto buscarPorId(int idProducto);
 	
 	ProductoResponseDto eliminarPorId(int idProducto);
+	
+	boolean existePorNombreProducto(String nombreProducto);
 }

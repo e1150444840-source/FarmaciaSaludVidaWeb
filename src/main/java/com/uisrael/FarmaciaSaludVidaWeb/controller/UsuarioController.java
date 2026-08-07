@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,25 +37,41 @@ public class UsuarioController {
 	public String leerPagina(Model model) {
 		List<UsuarioResponseDto> resultadoDB = servicioUsuario.listarUsuario();
 		List<UsuarioResponseDto> listaFiltrada = resultadoDB.stream()
-	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdUsuario())) 
-	            .collect(Collectors.toList());
-		
+				.filter(c -> !eliminadosEnMemoria.contains(c.getIdUsuario())).collect(Collectors.toList());
+
 		model.addAttribute("listaUsuario", listaFiltrada);
 		return "/usuario/listarusuario"; // ruta fisica de la pagina
 	}
-	
+
 	@GetMapping("/nuevoUsuario")
 	public String crearUsuario(Model model) {
 		model.addAttribute("usuario", new UsuarioRequestDto());
 		return "/usuario/nuevousuario";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
-	public String guardarUsuario(@ModelAttribute UsuarioRequestDto usuario) {
+	public String guardarUsuario(@ModelAttribute("usuario") UsuarioRequestDto usuario, BindingResult result,
+			Model model) {
+
+		if (usuario.getIdUsuario() == 0) {
+
+			if (servicioUsuario.existePorUserName(usuario.getUsername())) {
+				result.rejectValue("username", "error.usuario", "Este nombre de usuario ya se encuentra registrado.");
+			}
+			if (servicioUsuario.existePorPassword(usuario.getPassword())) {
+				result.rejectValue("password", "error.password", "Este password ya se encuentra registrado.");
+			}
+		}
+
+		if (result.hasErrors()) {
+			return "usuario/nuevousuario"; 
+		}
+
 		servicioUsuario.guardarUsuario(usuario);
 		return "redirect:/usuario";
 	}
-	
+
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idUsuario}")
@@ -65,11 +82,11 @@ public class UsuarioController {
 		// 4.- redireccione al formulario nuevo
 		return "/usuario/nuevousuario";
 	}
-	
+
 	// ELIMINAR
 	@GetMapping("/eliminar/{idUsuario}")
 	public String eliminarUsuario(@PathVariable int idUsuario) {
-	    eliminadosEnMemoria.add(idUsuario); 
-	    return "redirect:/usuario";
+		eliminadosEnMemoria.add(idUsuario);
+		return "redirect:/usuario";
 	}
 }

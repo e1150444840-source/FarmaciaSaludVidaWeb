@@ -67,11 +67,15 @@
 										<span class="input-group-text bg-light"><i
 											class="fas fa-id-card text-muted"></i></span> <input type="text"
 											class="form-control" th:field="*{ciCliente}"
-											placeholder="Ej. 1700000000" maxlength="10"
-											pattern="[0-9]{10}"
+											th:errorclass="is-invalid" placeholder="Ej. 1700000000"
+											maxlength="10" pattern="[0-9]{10}"
 											oninput="this.value = this.value.replace(/[^0-9]/g, '')"
 											required>
 									</div>
+									<!-- Mensaje de error para Cédula -->
+									<div class="text-danger small mt-1 fw-bold"
+										th:if="${#fields.hasErrors('ciCliente')}"
+										th:errors="*{ciCliente}"></div>
 								</div>
 
 								<!-- Teléfono -->
@@ -81,11 +85,15 @@
 										<span class="input-group-text bg-light"><i
 											class="fas fa-phone text-muted"></i></span> <input type="text"
 											class="form-control" th:field="*{telefonoCliente}"
-											maxlength="10" placeholder="Ej. 0991234567"
-											pattern="[0-9]{10}"
+											th:errorclass="is-invalid" maxlength="10"
+											placeholder="Ej. 0991234567" pattern="[0-9]{10}"
 											oninput="this.value = this.value.replace(/[^0-9]/g, '')"
 											required>
 									</div>
+									<!-- Mensaje de error para Teléfono -->
+									<div class="text-danger small mt-1 fw-bold"
+										th:if="${#fields.hasErrors('telefonoCliente')}"
+										th:errors="*{telefonoCliente}"></div>
 								</div>
 
 								<!-- Dirección -->
@@ -109,8 +117,13 @@
 										<span class="input-group-text bg-light"><i
 											class="fas fa-envelope text-muted"></i></span> <input type="email"
 											class="form-control" th:field="*{correoCliente}"
-											placeholder="correo@ejemplo.com" required>
+											th:errorclass="is-invalid" placeholder="correo@ejemplo.com"
+											required>
 									</div>
+									<!-- Mensaje de error para Correo -->
+									<div class="text-danger small mt-1 fw-bold"
+										th:if="${#fields.hasErrors('correoCliente')}"
+										th:errors="*{correoCliente}"></div>
 								</div>
 
 								<!-- Tipo de Cliente -->
@@ -121,8 +134,8 @@
 									<div class="input-group">
 										<span class="input-group-text bg-light"> <i
 											class="fas fa-user-tag text-muted"></i>
-										</span> <select class="form-select" th:field="*{fkTipoCliente.idTipoCliente}"
-											required>
+										</span> <select class="form-select"
+											th:field="*{fkTipoCliente.idTipoCliente}" required>
 											<option value="0" disabled>-- Seleccione un Tipo de
 												Cliente --</option>
 											<option th:each="tipoCliente : ${listaTipoCliente}"

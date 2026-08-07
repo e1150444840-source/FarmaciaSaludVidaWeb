@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.LoteRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.LoteResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.ILoteService;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class LoteServiceImpl implements ILoteService {
@@ -46,6 +49,17 @@ public class LoteServiceImpl implements ILoteService {
 	            .retrieve()
 	            .bodyToMono(LoteResponseDto.class)
 	            .block();
+	}
+
+	@Override
+	public boolean existePorNumeroLote(String numeroLote) {
+		return Boolean.TRUE.equals(webClient.get()
+				.uri(uriBuilder -> uriBuilder.path("/lote/existePorNumeroLote/{numeroLote}").build(numeroLote))
+				.retrieve()
+				.bodyToMono(Boolean.class)
+				.onErrorResume(WebClientResponseException.class, ex -> Mono.just(false))
+				.onErrorReturn(false)
+				.block());
 	}
 
 }

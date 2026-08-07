@@ -14,5 +14,7 @@ public interface IFarmaciaService {
 	FarmaciaResponseDto buscarPorId(int idFarmacia);
 	
 	FarmaciaResponseDto eliminarPorId(int idFarmacia);
+	
+	boolean existePorNombreFarmacia(String nombreFarmacia);
 
 }

@@ -14,4 +14,8 @@ public interface IUsuarioService {
 	UsuarioResponseDto buscarPorId(int idUsuario);
 	
 	UsuarioResponseDto eliminarPorId(int idUsuario);
+	
+	boolean existePorPassword(String password);
+
+	boolean existePorUserName(String username);
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,26 +37,38 @@ public class FarmaciaController {
 	public String leerPagina(Model model) {
 		List<FarmaciaResponseDto> resultadoDB = servicioFarmacia.listarFarmacia();
 		List<FarmaciaResponseDto> listaFiltrada = resultadoDB.stream()
-	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdFarmacia())) 
-	            .collect(Collectors.toList());
-		
+				.filter(c -> !eliminadosEnMemoria.contains(c.getIdFarmacia())).collect(Collectors.toList());
+
 		model.addAttribute("listaFarmacia", listaFiltrada);
 		return "/farmacia/listarfarmacia"; // ruta fisica de la pagina
 	}
-	
+
 	@GetMapping("/nuevoFarmacia")
 	public String crearFarmacia(Model model) {
 		model.addAttribute("farmacia", new FarmaciaRequestDto());
 		return "/farmacia/nuevofarmacia";
 	}
 
+	// GUARDAR
 	@PostMapping("/guardar")
-	public String guardarFarmacia(@ModelAttribute FarmaciaRequestDto farmacia) {
+	public String guardarFarmacia(@ModelAttribute("farmacia") FarmaciaRequestDto farmacia, BindingResult result,
+			Model model) {
+
+		if (farmacia.getIdFarmacia() == 0) {
+
+			if (servicioFarmacia.existePorNombreFarmacia(farmacia.getNombreFarmacia())) {
+				result.rejectValue("nombreFarmacia", "error.farmacia", "Esta farmacia ya se encuentra registrada.");
+			}
+		}
+
+		if (result.hasErrors()) {
+			return "farmacia/nuevofarmacia"; 
+		}
 
 		servicioFarmacia.guardarFarmacia(farmacia);
 		return "redirect:/farmacia";
 	}
-	
+
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idFarmacia}")
@@ -70,8 +83,8 @@ public class FarmaciaController {
 	// ELIMINAR
 	@GetMapping("/eliminar/{idFarmacia}")
 	public String eliminarFarmacia(@PathVariable int idFarmacia) {
-	    eliminadosEnMemoria.add(idFarmacia); 
-	    return "redirect:/farmacia";
+		eliminadosEnMemoria.add(idFarmacia);
+		return "redirect:/farmacia";
 	}
 
 }

@@ -14,4 +14,6 @@ public interface ITipoClienteService {
 	TipoClienteResponseDto buscarPorId(int idTipoCliente);
 	
 	TipoClienteResponseDto eliminarPorId(int idTipoCliente);
+	
+	boolean existePorNombreTipoCliente(String nombreTipoCliente);
 }

@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.request.ProductoRequestDto;
 import com.uisrael.FarmaciaSaludVidaWeb.model.dto.response.ProductoResponseDto;
 import com.uisrael.FarmaciaSaludVidaWeb.services.IProductoService;
+
+import reactor.core.publisher.Mono;
 
 @Service
 public class ProductoServiceImpl implements IProductoService {
@@ -21,32 +24,34 @@ public class ProductoServiceImpl implements IProductoService {
 
 	@Override
 	public List<ProductoResponseDto> listarProducto() {
-		return webClient.get().uri("/producto").retrieve()
-				.bodyToFlux(ProductoResponseDto.class).collectList().block();
+		return webClient.get().uri("/producto").retrieve().bodyToFlux(ProductoResponseDto.class).collectList().block();
 	}
 
 	@Override
 	public void guardarProducto(ProductoRequestDto nuevo) {
-		webClient.post().uri("/producto")
-		.bodyValue(nuevo).retrieve().toBodilessEntity().block();
+		webClient.post().uri("/producto").bodyValue(nuevo).retrieve().toBodilessEntity().block();
 	}
 
 	@Override
 	public ProductoResponseDto buscarPorId(int idProducto) {
-		return webClient.get().uri(UriBuilder -> UriBuilder.path("/producto/buscarId/{idProducto}")
-				.build(idProducto)).retrieve().bodyToMono(ProductoResponseDto.class).block();
+		return webClient.get().uri(UriBuilder -> UriBuilder.path("/producto/buscarId/{idProducto}").build(idProducto))
+				.retrieve().bodyToMono(ProductoResponseDto.class).block();
 	}
 
 	@Override
 	public ProductoResponseDto eliminarPorId(int idProducto) {
 		return webClient.post()
-	            .uri(uriBuilder -> uriBuilder.path("/producto/eliminarId/{idProducto}")
-	                    .build(idProducto))
-	            .retrieve()
-	            .bodyToMono(ProductoResponseDto.class)
-	            .block();
+				.uri(uriBuilder -> uriBuilder.path("/producto/eliminarId/{idProducto}").build(idProducto)).retrieve()
+				.bodyToMono(ProductoResponseDto.class).block();
 	}
 
-
+	@Override
+	public boolean existePorNombreProducto(String nombreProducto) {
+		return Boolean.TRUE.equals(webClient.get()
+				.uri(uriBuilder -> uriBuilder.path("/producto/existePorNombreProducto/{nombreProducto}")
+						.build(nombreProducto))
+				.retrieve().bodyToMono(Boolean.class)
+				.onErrorResume(WebClientResponseException.class, ex -> Mono.just(false)).onErrorReturn(false).block());
+	}
 
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ public class CategoriaController {
 
 	@Autowired
 	private ICategoriaService servicioCategoria;
-	
+
 	private final List<Integer> eliminadosEnMemoria = new ArrayList<>();
 
 	// CONSTRUCTOR
@@ -34,13 +35,12 @@ public class CategoriaController {
 
 	@GetMapping
 	public String leerPagina(Model model) {
-	    List<CategoriaResponseDto> resultadoDB = servicioCategoria.listarCategoria();
-	    // Filtramos para ignorar los IDs que se marcaron como "eliminados"
-	    List<CategoriaResponseDto> listaFiltrada = resultadoDB.stream()
-	            .filter(c -> !eliminadosEnMemoria.contains(c.getIdCategoria())) 
-	            .collect(Collectors.toList());
+		List<CategoriaResponseDto> resultadoDB = servicioCategoria.listarCategoria();
+		// Filtramos para ignorar los IDs que se marcaron como "eliminados"
+		List<CategoriaResponseDto> listaFiltrada = resultadoDB.stream()
+				.filter(c -> !eliminadosEnMemoria.contains(c.getIdCategoria())).collect(Collectors.toList());
 
-	    model.addAttribute("listaCategoria", listaFiltrada);
+		model.addAttribute("listaCategoria", listaFiltrada);
 		return "/producto/listarcategoria"; // ruta fisica de la pagina
 	}
 
@@ -51,12 +51,23 @@ public class CategoriaController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarCategoria(@ModelAttribute CategoriaRequestDto categoria) {
+	public String guardarCategoria(@ModelAttribute("categoria") CategoriaRequestDto categoria, BindingResult result,
+			Model model) {
+		if (categoria.getIdCategoria() == 0) {
+
+			if (servicioCategoria.existePorNombreCategoria(categoria.getNombreCategoria())) {
+				result.rejectValue("nombreCategoria", "error.categoria", "Esta categoria ya se encuentra registrada.");
+			}
+		}
+
+		if (result.hasErrors()) {
+			return "categoria/nuevocategoria";
+		}
 
 		servicioCategoria.guardarCategoria(categoria);
 		return "redirect:/categoria";
 	}
-	
+
 	// EDITAR
 	// 1.- recuperar el registro utilizando el id
 	@GetMapping("editar/{idCategoria}")
@@ -67,11 +78,11 @@ public class CategoriaController {
 		// 4.- redireccione al formulario nuevo
 		return "/producto/nuevocategoria";
 	}
-	
+
 	// ELIMINAR
 	@GetMapping("/eliminar/{idCategoria}")
 	public String eliminarCategoria(@PathVariable int idCategoria) {
-	    eliminadosEnMemoria.add(idCategoria); 
-	    return "redirect:/categoria";
+		eliminadosEnMemoria.add(idCategoria);
+		return "redirect:/categoria";
 	}
 }
